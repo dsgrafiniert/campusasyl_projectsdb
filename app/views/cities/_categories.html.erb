@@ -1,0 +1,11 @@
+<ul class="list-group">
+	<% categories.each do |cat| %>
+  <li class="list-group-item">
+	<% if cat.children.any? %>
+	<h4><%=link_to cat.title, category_path(cat, :city_id => @city.id) %></h4>
+	<%= render :partial => 'categories', :locals => {:categories => cat.children} %>
+	<% else %>
+	<%=link_to cat.title, category_path(cat, :city_id => @city.id) %>
+	<% end %></li>
+<% end %>
+</ul>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+<div class="col-md-3">
+	<ul class="list-group">
+		<% @categories.each do |cat| %>
+	  <li class="list-group-item"><%= cat.title %></li>
+	<% end %>
+	</ul>
+</div>
+<div class="col-md-9">
+<h1>Listing Projects</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>City</th>
+      <th>Category</th>
+      <th>Time</th>
+      <th>Urgent</th>
+      <th>Required people</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.title %></td>
+        <td><%= project.description %></td>
+        <td><%= project.city %></td>
+        <td><%= project.category %></td>
+        <td><%= project.time %></td>
+        <td><%= project.urgent %></td>
+        <td><%= project.required_people %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>
+</div>
+</div>

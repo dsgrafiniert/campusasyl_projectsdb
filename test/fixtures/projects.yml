@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  city_id: 
+  category_id: 
+  time: 2015-09-13 12:15:54
+  urgent: false
+  required_people: 1
+
+two:
+  title: MyString
+  description: MyText
+  city_id: 
+  category_id: 
+  time: 2015-09-13 12:15:54
+  urgent: false
+  required_people: 1

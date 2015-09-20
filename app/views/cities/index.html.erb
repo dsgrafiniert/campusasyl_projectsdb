@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Herzlich willkommen bei CAMPUS Asyl</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>In welcher Stadt würdest du gern helfen?</th>
+	<% if user_signed_in? %>
+	  <% if current_user.try(:admin?) %>
+      <th colspan="2"></th>
+	<% end %>
+	<% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cities.sort.each do |city| %>
+      <tr>
+        <td><%= link_to city.title, city %></td>
+		<% if user_signed_in? %>
+		  <% if current_user.try(:admin?) %>
+        <td><%= link_to 'Edit', edit_city_path(city) %></td>
+        <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% end %>
+		<% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user_signed_in? %>
+  <% if current_user.try(:admin?) %>
+<%= link_to 'New City', new_city_path %>
+<% end %>
+<% end %>

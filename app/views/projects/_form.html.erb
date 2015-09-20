@@ -1,0 +1,21 @@
+<%= simple_form_for(@project) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.association :city %>
+    <%= f.association :category %>
+    <%= f.input :time %>
+    <%= f.input :urgent %>
+    <%= f.input :is_private %>
+
+    <%= f.input :required_people %>
+	<%= f.association :users, :as => :check_boxes%>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,138 @@
+<h2><%= @project.title %></h2>
+<div class="row">
+	<div class="col-md-3">
+		<h4>Verantwortliche Nutzer:</h4>
+		<ul class="list-group">
+			<% @project.users.each do |user| %>
+			<% if user_signed_in? %>
+			<a class="list-group-item clearfix" href="<%=user_url(user) %>">
+				<%=image_tag user.avatar.url(:thumb), :class => "pull-left" %>
+				&nbsp;<%=user.name %>
+			</a>
+			<% else %>
+			<li class="list-group-item">
+				<%= user.name %>
+			</li>
+			<% end %>
+
+			<% end %>
+		</ul>
+
+
+	</div>
+	<div class="col-md-9">
+		<p><%=@project.description %></p>
+		<% if @project.has_view_permission?(current_user) %>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Termin</th>
+					<th>Benötigte Personen</th>
+					<% if @project.has_edit_permission?(current_user) %>
+
+					<th colspan="2"></th>
+					<% end %>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @project.events.each do |event| %>
+				<tr>
+					<td><%= event.date %></td>
+					<td><%= event.required_people %></td>
+
+					<% if @project.has_edit_permission?(current_user) %>
+
+					<td><%= link_to 'Edit', edit_event_path(event) %></td>
+					<td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					<% end %>
+
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<br>
+		<% if @project.has_edit_permission?(current_user) %>
+			<%= link_to 'New Event', new_event_path(project_id: @project.id)  %>
+			<br>
+		<% end %>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th width="100"></th>
+					<th>Dateien</th>
+
+					<% if @project.has_edit_permission?(current_user) %>
+
+					<th colspan="2"></th>
+					<% end %>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @project.uploads.each do |upload| %>
+				<tr>
+					<td><% if upload.file.exists?(:thumb) %><%= image_tag upload.file.url(:thumb) %><% end %></td>
+
+					<td><%= upload.name %></td>
+					<% if @project.has_edit_permission?(current_user) %>
+
+					<td><%= link_to 'Edit', edit_upload_path(upload) %></td>
+					<td><%= link_to 'Destroy', upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					<% end %>
+
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<br>
+		<% if @project.has_edit_permission?(current_user) %>
+
+		<%= simple_form_for(Upload.new(project_id: @project.id), {url: "/uploads/upload", html: { multipart: true, class: "dropzone"}}) do |f| %>
+			<%= f.error_notification %>
+			<%= f.hidden_field :project_id%>
+
+			<div class="form-inputs">	 
+				<div class="fallback">
+					<%= f.file_field :file %><br>
+				</div>
+			</div>
+		<% end %>
+			<br>
+			<br>
+		
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th width="100"></th>
+							<th>Nutzer</th>
+							<th colspan="2"></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% @project.participations.where(:status => 1).each do |participation| %>
+						<tr>
+							<td><% if participation.user.avatar.exists?(:thumb) %><%= image_tag participation.user.avatar.url(:thumb) %><% end %> </td>
+
+							<td><%=participation.user.name%></td>
+
+							<td><%= link_to 'Approve', approve_participant_path(@project, participation) %></td>
+							<td><%= link_to 'Decline', decline_participant_path(@project, participation) %></td>
+
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			
+		<br>
+		<br>
+		<%= link_to 'Edit', edit_project_path(@project) %> |
+		<% end %>
+		<% else %>
+		<p><%= link_to 'Participate', participate_project_path(@project), :class=> 'btn btn-default'%></p>
+		<% end %>
+		<%= link_to 'Back', city_path(@project.city) %>
+	</div>
+</div>
