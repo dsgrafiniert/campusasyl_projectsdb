@@ -71,7 +71,7 @@ class ProjectsController < ApplicationController
   end
   
   def participate
-      @participation = Participation.new(:project => @project, :user => current_user)
+      @participation = Participation.where(:project => @project, :user => current_user).first_or_create
       if (@project.is_private)
         @participation.status=:applied
       else

@@ -18,9 +18,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
     if @user.update_attributes(secure_params)
-      redirect_to users_path, :notice => "User updated."
+      redirect_to user_path(@user), :notice => "User updated."
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      redirect_to user_path(@user), :alert => "Unable to update user."
     end
   end
 
