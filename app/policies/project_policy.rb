@@ -13,6 +13,10 @@ class ProjectPolicy
   def show?
     return true
   end
+  
+  def create?
+    @current_user.admin? || @project.city.users.include?(@current_user)
+  end
 
   def update?
     @current_user.admin?

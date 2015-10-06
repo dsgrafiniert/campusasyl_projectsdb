@@ -9,6 +9,9 @@
 <% if @user.email %>
 <p>Email: <%=link_to "E-Mail senden", "mailto://"+@user.email  %></p>
 <% end%>
+<% if (@user.telephone && @user.may_see_telephone?(current_user)) %>
+<p>Telefon: <%= @user.telephone %></p>
+<% end%>
 <% if @user.provider == "facebook" %>
 <p><%= link_to "zum Facebook-Profil", "http://facebook.com/"+@user.uid %></p>
 <% end %>

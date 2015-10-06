@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   after_action :verify_authorized, only: [:edit, :update, :destroy]
+  
   # GET /cities
   # GET /cities.json
   def index
@@ -49,9 +50,11 @@ class EventsController < ApplicationController
   # PATCH/PUT /cities/1
   # PATCH/PUT /cities/1.json
   def update
+    authorize @event
+    
     respond_to do |format|
-      if @event.update(city_params)
-        format.html { redirect_to @event, notice: 'event was successfully updated.' }
+      if @event.update(event_params)
+        format.html { redirect_to @event.project, notice: 'event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -63,9 +66,12 @@ class EventsController < ApplicationController
   # DELETE /cities/1
   # DELETE /cities/1.json
   def destroy
+    authorize @event
+    project=@event.project
+    
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to project, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -78,7 +84,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:date, :project_id, :required_people)
+      params.require(:event).permit(:date, :project_id, :required_people, schedule_attributes: Schedulable::ScheduleSupport.param_names)
     end
   
 end

@@ -36,18 +36,21 @@
 			</thead>
 
 			<tbody>
-				<% @project.events.each do |event| %>
+				<% @project.events.each do |ev| %>
+				<% ev.remaining_event_occurrences.sort_by(&:remaining_free_places).reverse.each do |event| %>
 				<tr>
-					<td><%= event.date %></td>
-					<td><%= event.required_people %></td>
+					<td><%= link_to l(event.date), event %> </td>
+						
+					<td><%= event.remaining_free_places %> von <%= ev.required_people %></td>
 
 					<% if @project.has_edit_permission?(current_user) %>
 
-					<td><%= link_to 'Edit', edit_event_path(event) %></td>
-					<td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					<td><%= link_to 'Edit', edit_event_path(ev) %></td>
+					<td><%= link_to 'Destroy', ev, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 					<% end %>
 
 				</tr>
+				<% end %>
 				<% end %>
 			</tbody>
 		</table>
@@ -73,9 +76,10 @@
 			<tbody>
 				<% @project.uploads.each do |upload| %>
 				<tr>
-					<td><% if upload.file.exists?(:thumb) %><%= image_tag upload.file.url(:thumb) %><% end %></td>
+					<td><% if upload.file.exists?(:thumb) %><%= link_to image_tag(upload.file.url(:thumb)), upload.file.url(:original, false)  %><% end %></td>
 
-					<td><%= upload.name %></td>
+					<td>	<%= link_to upload.name, upload.file.url(:original, false) %>
+					</td>
 					<% if @project.has_edit_permission?(current_user) %>
 
 					<td><%= link_to 'Edit', edit_upload_path(upload) %></td>

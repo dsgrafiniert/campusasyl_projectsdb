@@ -3,14 +3,20 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "50x50#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates :name, :presence => true
+  validates :email, :presence => true
   acts_as_taggable_on :skills
+  has_many :projects, :through => :users_projects
+  has_many :users_projects
+  has_many :event_occurrences, :through => :attends
+  has_many :attends
   
   def set_default_role
     self.role ||= :user
   end
   
   def email_required?
-    false
+    true
   end
 
   def email_changed?
@@ -35,11 +41,18 @@ class User < ActiveRecord::Base
     end
     result
   end
+  
+  def may_see_telephone?(user)
+     if !user.nil? && (projects.collect{|p| p.city}.collect{|c| c.projects}.flatten.collect{|p| p.users}.flatten.include?(user) || user.try(:admin?))
+       return true
+     else
+       return false
+     end
+   end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
          
   private
     def process_uri(uri)

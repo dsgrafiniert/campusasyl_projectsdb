@@ -2,8 +2,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-	<%= f.input :date %>
+	<div class="field">
+	    <%= f.input :schedule, as: :schedule %>
+	  </div>
+	
+	
     <%= f.input :required_people %>
+
     <%= f.association :project %>
   </div>
 

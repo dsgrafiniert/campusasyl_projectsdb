@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
+  before_action :set_city, only: [:show, :edit, :update, :destroy, :invite]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   after_action :verify_authorized, only: [:edit, :update, :destroy]
   # GET /cities
@@ -13,7 +13,7 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
-    @projects = @city.projects
+    @projects = @city.projects.order('urgent DESC, title')
     @categories = Category.where(:category => nil)
   end
 
@@ -28,6 +28,9 @@ class CitiesController < ApplicationController
   def edit
     authorize City
     
+  end
+  
+  def invite
   end
 
   # POST /cities
@@ -76,6 +79,8 @@ class CitiesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_city
       @city = City.find(params[:id])
+      @city.generate_token unless @city.invitationHash
+      @city
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

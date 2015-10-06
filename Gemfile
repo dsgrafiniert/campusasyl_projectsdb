@@ -11,7 +11,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'paperclip'
 gem 'acts-as-taggable-on'
 gem 'open_uri_redirections'
-
+gem 'ice_cube'
+gem 'schedulable'
+gem 'http_accept_language'
 group :development, :test do
   gem 'byebug'
 end

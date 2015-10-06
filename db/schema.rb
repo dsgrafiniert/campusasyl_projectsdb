@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919124144) do
+ActiveRecord::Schema.define(version: 20151003185629) do
 
   create_table "attends", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "event_id"
     t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "event_occurrence_id"
   end
 
-  add_index "attends", ["event_id"], name: "index_attends_on_event_id"
   add_index "attends", ["user_id"], name: "index_attends_on_user_id"
 
   create_table "capabilities", force: :cascade do |t|
@@ -38,8 +37,18 @@ ActiveRecord::Schema.define(version: 20150919124144) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "invitationHash"
+  end
+
+  create_table "event_occurrences", force: :cascade do |t|
+    t.integer  "event_id"
+    t.datetime "date"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "schedulable_id"
+    t.integer  "schedulable_type"
   end
 
   create_table "events", force: :cascade do |t|
@@ -78,6 +87,21 @@ ActiveRecord::Schema.define(version: 20150919124144) do
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id"
   add_index "projects", ["city_id"], name: "index_projects_on_city_id"
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "schedulable_id"
+    t.string   "schedulable_type"
+    t.date     "date"
+    t.time     "time"
+    t.string   "rule"
+    t.string   "interval"
+    t.text     "day"
+    t.text     "day_of_week"
+    t.datetime "until"
+    t.integer  "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -134,6 +158,7 @@ ActiveRecord::Schema.define(version: 20150919124144) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "telephone"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

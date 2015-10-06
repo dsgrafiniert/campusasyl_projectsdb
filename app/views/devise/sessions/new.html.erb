@@ -1,9 +1,9 @@
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign in</h3>
+    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :class => 'button right' %>
+	<h3>Sign in</h3>
     <%= devise_error_messages! %>
 
-	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
 
     <div class="form-group">
       <%- if devise_mapping.registerable? %>
