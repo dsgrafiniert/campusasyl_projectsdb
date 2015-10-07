@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003185629) do
+ActiveRecord::Schema.define(version: 20151006044619) do
 
   create_table "attends", force: :cascade do |t|
     t.integer  "user_id"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 20151003185629) do
     t.integer  "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "status"
   end
 
   add_index "users_cities", ["city_id"], name: "index_users_cities_on_city_id"

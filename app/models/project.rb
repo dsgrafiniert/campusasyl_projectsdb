@@ -1,11 +1,11 @@
 class Project < ActiveRecord::Base
   belongs_to :city
   belongs_to :category
-  has_many :users, :through => :users_projects
+  has_many :users, -> { distinct }, :through => :users_projects
   has_many :users_projects
   has_many :events
   has_many :uploads
-  has_many :participants, :through => :participations, :class_name => 'User'
+  has_many :participants, -> { distinct }, :through => :participations, :class_name => 'User'
   has_many :participations
   accepts_nested_attributes_for :users, :users_projects, :participants, :participations
   
