@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   validates :name, :presence => true
   validates :email, :presence => true
-  acts_as_taggable_on :skills
+  acts_as_taggable_on :skills, :language_skills, :study, :working_experience
+  attr_accessor :new_skill, :new_language_skill, :new_study, :new_working_experience
+  
   has_many :projects, :through => :users_projects
   has_many :users_projects
   has_many :event_occurrences, :through => :attends

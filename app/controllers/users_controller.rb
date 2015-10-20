@@ -13,14 +13,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
   end
+  
+
 
   def update
     @user = User.find(params[:id])
     authorize @user
-    if @user.update_attributes(secure_params)
+    if @user.update(secure_params)
       redirect_to user_path(@user), :notice => "User updated."
     else
-      redirect_to user_path(@user), :alert => "Unable to update user."
+      redirect_to user_path(@user), :alert => "Unable to update user."+@user.errors.messages.inspect
     end
   end
 
@@ -34,7 +36,7 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:role, :skill_list, :telephone, :email, :name)
+    params.require(:user).permit(:role, :skill_list, :study_list, :working_experience_list, :language_skill_list, :telephone, :email, :name)
   end
 
 end

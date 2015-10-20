@@ -14,6 +14,7 @@ gem 'open_uri_redirections'
 gem 'ice_cube'
 gem 'schedulable'
 gem 'http_accept_language'
+gem 'i18n-tasks'
 group :development, :test do
   gem 'byebug'
 end

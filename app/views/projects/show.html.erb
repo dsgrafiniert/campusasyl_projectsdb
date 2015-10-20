@@ -1,6 +1,11 @@
 <h2><%= @project.title %></h2>
 <div class="row">
 	<div class="col-md-3">
+		
+		<% if (!@project.participants.include?(current_user)) %>
+		<p><%= link_to 'Participate', participate_project_path(@project), :class=> 'btn btn-default'%></p>
+		<% end %>
+		
 		<h4>Verantwortliche Nutzer:</h4>
 		<ul class="list-group">
 			<% @project.users.each do |user| %>
@@ -118,9 +123,9 @@
 					<tbody>
 						<% @project.participations.where(:status => 1).each do |participation| %>
 						<tr>
-							<td><% if participation.user.avatar.exists?(:thumb) %><%= image_tag participation.user.avatar.url(:thumb) %><% end %> </td>
+							<td><% if participation.participant.avatar.exists?(:thumb) %><%= image_tag participation.participant.avatar.url(:thumb) %><% end %> </td>
 
-							<td><%=participation.user.name%></td>
+							<td><%=participation.participant.name%></td>
 
 							<td><%= link_to 'Approve', approve_participant_path(@project, participation) %></td>
 							<td><%= link_to 'Decline', decline_participant_path(@project, participation) %></td>
@@ -134,9 +139,8 @@
 		<br>
 		<%= link_to 'Edit', edit_project_path(@project) %> |
 		<% end %>
-		<% else %>
-		<p><%= link_to 'Participate', participate_project_path(@project), :class=> 'btn btn-default'%></p>
 		<% end %>
+		
 		<%= link_to 'Back', city_path(@project.city) %>
 	</div>
 </div>

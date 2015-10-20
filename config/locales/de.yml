@@ -1,13 +1,6 @@
 ---
 de:
-  
-  edit_account: 'Profil bearbeiten'
-  sign_out: "Abmelden"
-  sign_in: "Einloggen"
-  sign_up: "Registrieren"
-  
-  users: "Nutzer"
-  cities: "Städte"
+  cities: Städte
   date:
     abbr_day_names:
     - So
@@ -87,16 +80,16 @@ de:
         other: vor mehr als %{count} Jahren
       x_days:
         one: vor einem Tag
-        other: "vor %{count} Tagen"
+        other: vor %{count} Tagen
       x_minutes:
         one: vor einer Minute
-        other: "vor %{count} Minuten"
+        other: vor %{count} Minuten
       x_months:
         one: vor einem Monat
-        other: "vor %{count} Monaten"
+        other: vor %{count} Monaten
       x_seconds:
         one: vor einer Sekunde
-        other: "vor %{count} Sekunden"
+        other: vor %{count} Sekunden
     prompts:
       day: Tag
       hour: Stunden
@@ -104,12 +97,12 @@ de:
       month: Monat
       second: Sekunde
       year: Jahr //all are in singular now
+  edit_account: Profil bearbeiten
   errors:
     format: "%{attribute} %{message}"
     messages:
       accepted: muss akzeptiert werden
       blank: muss ausgefüllt werden
-      present: darf nicht ausgefüllt werden
       confirmation: stimmt nicht mit %{attribute} überein
       empty: muss ausgefüllt werden
       equal_to: muss genau %{count} sein
@@ -124,11 +117,12 @@ de:
       not_a_number: ist keine Zahl
       not_an_integer: muss ganzzahlig sein
       odd: muss ungerade sein
+      other_than: darf nicht gleich %{count} sein
+      present: darf nicht ausgefüllt werden
       record_invalid: 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
       restrict_dependent_destroy:
-        one: Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz
-          existiert.
         many: Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren.
+        one: Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert.
       taken: ist bereits vergeben
       too_long:
         one: ist zu lang (mehr als 1 Zeichen)
@@ -139,12 +133,12 @@ de:
       wrong_length:
         one: hat die falsche Länge (muss genau 1 Zeichen haben)
         other: hat die falsche Länge (muss genau %{count} Zeichen haben)
-      other_than: darf nicht gleich %{count} sein
     template:
       body: 'Bitte überprüfen Sie die folgenden Felder:'
       header:
         one: 'Konnte %{model} nicht speichern: ein Fehler.'
         other: 'Konnte %{model} nicht speichern: %{count} Fehler.'
+  hello: Hello world
   helpers:
     select:
       prompt: Bitte wählen
@@ -204,6 +198,9 @@ de:
     precision:
       format:
         delimiter: ''
+  sign_in: Einloggen
+  sign_out: Abmelden
+  sign_up: Registrieren
   support:
     array:
       last_word_connector: " und "
@@ -216,3 +213,4 @@ de:
       long: "%A, %d. %B %Y, %H:%M Uhr"
       short: "%d. %B, %H:%M Uhr"
     pm: nachmittags
+  users: Nutzer

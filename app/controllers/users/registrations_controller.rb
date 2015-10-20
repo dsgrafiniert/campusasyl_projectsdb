@@ -22,6 +22,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end        
     end
   
+  def edit
+    @allstudies = Tagging.where(:context => "study").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+    puts @allstudies
+    super
+  end
+  
   protected
 
   def after_sign_up_path_for(resource)
