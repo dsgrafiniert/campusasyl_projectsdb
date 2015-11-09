@@ -1,5 +1,5 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy, :invite]
+  before_action :set_city, only: [:show, :edit, :update, :destroy, :invite, :participate]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   after_action :verify_authorized, only: [:edit, :update, :destroy]
   # GET /cities
@@ -74,6 +74,22 @@ class CitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def participate
+       @participation = CityParticipation.where(:city => @city, :participant => current_user).first_or_create
+      
+         @participation.status=:approved
+        respond_to do |format|
+           if @participation.save
+             format.html { redirect_to @city, notice: 'Successfully applied.' }
+             format.json { render :show, status: :created, location: @city }
+           else
+             format.html { render :new }
+             format.json { render json: @city.errors, status: :unprocessable_entity }
+           end
+         end
+
+   end
 
   private
     # Use callbacks to share common setup or constraints between actions.

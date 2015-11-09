@@ -1,10 +1,10 @@
-<h1>Unsere Projekte in <%= @city.title %> <small><%= @category.title%></small></h1>
+<h1><%= t '.unsere', :city_title => (@city.title) %> <small><%= @category.title%></small></h1>
 
 
 <div class="row">
 <div class="col-md-3">
-	<h3>Kategorien:</h3>
-	<%= link_to "Alle", city_path(@city) %>
+	<h3><%= t '.kategorien' %></h3>
+	<%= link_to (t '.alle'), city_path(@city) %>
 	
 	<%= render :partial => 'categories', :locals => {:categories => @categories} %>
 	
@@ -14,8 +14,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Category</th>
+      <th><%= t '.title_1' %></th>
+      <th><%= t '.category' %></th>
 	<% if user_signed_in? %>
 	  <% if current_user.try(:admin?) %>
       <th colspan="2"></th>
@@ -30,8 +30,8 @@
         <td><%= link_to project.category.title, project %></td>
 		<% if user_signed_in? %>
 		  <% if current_user.try(:admin?) %>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (t '.edit_1'), edit_project_path(project) %></td>
+        <td><%= link_to (t '.destroy_1'), project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<% end %><% end %>
 
       </tr>
@@ -42,7 +42,7 @@
 <br>
 	<% if user_signed_in? %>
 	  <% if current_user.try(:admin?) %>
-<%= link_to 'New Project', new_project_path(city_id: @city.id)  %>
+<%= link_to (t '.new_project'), new_project_path(city_id: @city.id)  %>
 <% end %><% end %>
 
 </div>
@@ -51,6 +51,6 @@
 
 <% if user_signed_in? %>
   <% if current_user.try(:admin?) %>
-<%= link_to 'Edit', edit_city_path(@city) %> |
+<%= link_to (t '.edit_2'), edit_city_path(@city) %> |
 <% end %><% end %>
-<%= link_to 'Back', cities_path %>
+<%= link_to (t '.back_2'), cities_path %>

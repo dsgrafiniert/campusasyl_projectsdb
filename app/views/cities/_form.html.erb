@@ -1,9 +1,17 @@
-<%= simple_form_for(@city) do |f| %>
+<%= simple_form_for(@city, :html=> { :class=>"form-horizontal"}) do |f| %>
   <%= f.error_notification %>
+  <div class="form-group">
+	<%= f.label :title, class: "col-md-2 control-label" %>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-	<%= f.association :users, :as => :check_boxes%>
+    <div class="col-md-10">
+
+    <%= f.input :title, :label => false, class: "form-control col-md-10" %>
+</div>
+<%= f.label :users, class: "col-md-2 control-label" %>
+
+<div class="col-md-10">
+	<%= f.association :users, :as => :check_boxes, :label => false, boolean_style: :inline, item_wrapper_tag: :div, item_wrapper_class: "col-md-3 col-md-offset-1 well" %>
+	</div>
   </div>
 
   <div class="form-actions">

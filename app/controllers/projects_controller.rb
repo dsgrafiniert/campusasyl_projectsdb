@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :participate, :approve, :decline]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :participate, :approve, :decline, :find_participants]
   before_action :authenticate_user!, only: [:participate]
 
   
@@ -89,6 +89,11 @@ class ProjectsController < ApplicationController
     
   end
   
+  def find_participants
+    @users = CityParticipation.where(:city => @project.city).map{|e| e.participant}.flatten
+    @users.sort{|a, b| b.common_tags(@project) <=> a.common_tags(@project)}
+  end
+  
   def approve
     participation = Participation.find(params[:participant_id])
     respond_to do |format|
@@ -120,6 +125,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :description, :city_id, :category_id, :time, :urgent, :required_people, :is_private, :user_ids => [])
+      params.require(:project).permit(:title, :description, :city_id, :category_id, :time, { skill_list: [], study_list:[], working_experience_list:[], language_skill_list:[] }, :new_language_skill, :new_working_experience, :new_study, :new_skill, :urgent, :required_people, :is_private, :user_ids => [])
     end
 end

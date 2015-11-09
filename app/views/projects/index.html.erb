@@ -9,18 +9,18 @@
 	</ul>
 </div>
 <div class="col-md-9">
-<h1>Listing Projects</h1>
+<h1><%= t '.listing_1' %></h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>City</th>
-      <th>Category</th>
-      <th>Time</th>
-      <th>Urgent</th>
-      <th>Required people</th>
+      <th><%= t '.title_4' %></th>
+      <th><%= t '.description' %></th>
+      <th><%= t '.city' %></th>
+      <th><%= t '.category_3' %></th>
+      <th><%= t '.time' %></th>
+      <th><%= t '.urgent_1' %></th>
+      <th><%= t '.required' %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -35,9 +35,9 @@
         <td><%= project.time %></td>
         <td><%= project.urgent %></td>
         <td><%= project.required_people %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (t '.show_6'), project %></td>
+        <td><%= link_to (t '.edit_8'), edit_project_path(project) %></td>
+        <td><%= link_to (t '.destroy_5'), project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -45,6 +45,6 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to (t '.new_project_2'), new_project_path %>
 </div>
 </div>

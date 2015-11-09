@@ -5,19 +5,19 @@
 	<div class="col-md-3">
 		<% if user_signed_in? %>
 		  <% if !@event.users.include?(current_user) %>
-			<%= link_to "Teilnehmen", attend_event_occurrence_path(@event), :class=>"btn btn-default"%>
+			<%= link_to (t :teilnehmen), attend_event_occurrence_path(@event), :class=>"btn btn-default"%>
 		  <% end %>
 		<% else %>
-		  <%= link_to "Teilnehmen", attend_event_occurrence_path(@event), :class=>"btn btn-default"%>
+		  <%= link_to (t :teilnehmen), attend_event_occurrence_path(@event), :class=>"btn btn-default"%>
 		<% end %>
 	</div>
 	<div class="col-md-9">
 		<table class="table table-striped">
 		  <thead>
 		    <tr>
-		      <th>Title</th>
-		      <th>Category</th>
-		      <th>Urgent</th>
+		      <th><%= t :title %></th>
+		      <th><%= t :category %></th>
+		      <th><%= t :urgent %></th>
 			<% if user_signed_in? %>
 			  <% if current_user.try(:admin?) %>
 		      <th colspan="2"></th>

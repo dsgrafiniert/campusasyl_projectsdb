@@ -1,173 +1,187 @@
 ---
 en:
-  cities: Städte
+  categories:
+    edit:
+      back: Back
+      editing: Editing
+      show: Show
+    index:
+      destroy: Destroy
+      edit: Edit
+      listing: Listing
+      new_category: New category
+      show_1: Show
+      title: Title
+    new:
+      back_1: Back
+      new_category_1: New category
+    show:
+      alle: Alle
+      back_2: Back
+      category: Category
+      destroy_1: Destroy
+      edit_1: Edit
+      edit_2: Edit
+      kategorien: Kategorien
+      new_project: New project
+      title_1: Title
+      unsere: Our projects in %{city_title}
+  category: Category
+  cities_overview: Cities
+  projects_overview: Projects
+  users_overview: Users
+  cities:
+    index:
+      new_city: New city
+      edit_3: Edit
+      destroy_2: Destroy
+    show:
+      unsere_1: Our projects in %{city_title}
+      alle: Alle
+      back_2: Zurück
+      category_1: Kategorie
+      destroy_1: Löschen
+      edit_1: Bearbeiten
+      edit_2: Bearbeiten
+      kategorien: Kategorien
+      new_project: New project
+      title_1: Title
+      title_2: Title
+      back_5: Zurück
   date:
-    abbr_day_names: '["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]'
-    abbr_month_names: '[nil, "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]'
-    day_names: '["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]'
-    formats:
-      default: "%d.%m.%Y"
-      long: "%e. %B %Y"
-      short: "%e. %b"
-    month_names: '[nil, "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]'
-    order: "[:day, :month, :year]"
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one: vor etwa einer Stunde
-        other: vor etwa %{count} Stunden
-      about_x_months:
-        one: vor etwa einem Monat
-        other: vor etwa %{count} Monaten
-      about_x_years:
-        one: vor etwa einem Jahr
-        other: vor etwa %{count} Jahren
-      almost_x_years:
-        one: vor fast einem Jahr
-        other: vor fast %{count} Jahren
-      half_a_minute: vor einer halben Minute
-      less_than_x_minutes:
-        one: vor weniger als einer Minute
-        other: vor weniger als %{count} Minuten
-      less_than_x_seconds:
-        one: vor weniger als eine Sekunde
-        other: vor weniger als %{count} Sekunden
-      over_x_years:
-        one: vor mehr als einem Jahr
-        other: vor mehr als %{count} Jahren
-      x_days:
-        one: vor einem Tag
-        other: vor %{count} Tagen
-      x_minutes:
-        one: vor einer Minute
-        other: vor %{count} Minuten
-      x_months:
-        one: vor einem Monat
-        other: vor %{count} Monaten
-      x_seconds:
-        one: vor einer Sekunde
-        other: vor %{count} Sekunden
-    prompts:
-      day: Tag
-      hour: Stunden
-      minute: Minute
-      month: Monat
-      second: Sekunde
-      year: Jahr //all are in singular now
+    day_names: Day names
+    month_names: Month names
+    order: Order
+  destroy: Destroy
+  devise:
+    passwords:
+      edit:
+        change_your: Change your
+      new:
+        forgot_your: Forgot your
+        we_ll_send: We'll send
+    registrations:
+      edit:
+        cancel_account: Cancel account
+        cancel_my: Cancel my
+        change: Change
+        edit_details: Edit details
+        leave_these: Leave these
+        unhappy_we_ll: Unhappy we ll
+        you_must_enter: You must enter
+      new:
+        sign_up: Sign up
+        sign_up_with: Sign up with Facebook
+    sessions:
+      new:
+        forgot: Forgot
+        remember_me: Remember me
+        sign_in: Sign in
+        sign_in_with: Sign in with Facebook
+        sign_up_1: Sign up
+  edit: Edit
   edit_account: Edit account
-  errors:
-    format: "%{attribute} %{message}"
-    messages:
-      accepted: muss akzeptiert werden
-      blank: muss ausgefüllt werden
-      confirmation: stimmt nicht mit %{attribute} überein
-      empty: muss ausgefüllt werden
-      equal_to: muss genau %{count} sein
-      even: must be even
-      exclusion: is not available
-      greater_than: must be greater than %{count}
-      greater_than_or_equal_to: must be greater or equal than %{count}
-      inclusion: is not a valid value
-      invalid: is not valid
-      less_than: muss kleiner als %{count} sein
-      less_than_or_equal_to: muss kleiner oder gleich %{count} sein
-      not_a_number: ist keine Zahl
-      not_an_integer: muss ganzzahlig sein
-      odd: muss ungerade sein
-      other_than: darf nicht gleich %{count} sein
-      present: darf nicht ausgefüllt werden
-      record_invalid: 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
-      restrict_dependent_destroy:
-        many: Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren.
-        one: Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert.
-      taken: ist bereits vergeben
-      too_long:
-        one: ist zu lang (mehr als 1 Zeichen)
-        other: ist zu lang (mehr als %{count} Zeichen)
-      too_short:
-        one: ist zu kurz (weniger als 1 Zeichen)
-        other: ist zu kurz (weniger als %{count} Zeichen)
-      wrong_length:
-        one: hat die falsche Länge (muss genau 1 Zeichen haben)
-        other: hat die falsche Länge (muss genau %{count} Zeichen haben)
-    template:
-      body: 'Bitte überprüfen Sie die folgenden Felder:'
-      header:
-        one: 'Konnte %{model} nicht speichern: ein Fehler.'
-        other: 'Konnte %{model} nicht speichern: %{count} Fehler.'
-  hello: Hello world
-  helpers:
-    select:
-      prompt: Bitte wählen
-    submit:
-      create: "%{model} erstellen"
-      submit: "%{model} speichern"
-      update: "%{model} aktualisieren"
-  number:
-    currency:
-      format:
-        delimiter: "."
-        format: "%n %u"
-        precision: '2'
-        separator: ","
-        significant: Significant
-        strip_insignificant_zeros: Strip insignificant zeros
-        unit: "€"
-    format:
-      delimiter: "."
-      precision: '2'
-      separator: ","
-      significant: Significant
-      strip_insignificant_zeros: Strip insignificant zeros
-    human:
-      decimal_units:
-        format: "%n %u"
-        units:
-          billion:
-            one: Milliarde
-            other: Milliarden
-          million: Millionen
-          quadrillion:
-            one: Billiarde
-            other: Billiarden
-          thousand: Tausend
-          trillion: Billionen
-          unit: Unit
-      format:
-        delimiter: Delimiter
-        precision: '3'
-        significant: 'true'
-        strip_insignificant_zeros: 'true'
-      storage_units:
-        format: "%n %u"
-        units:
-          byte:
-            one: Byte
-            other: Bytes
-          gb: GB
-          kb: KB
-          mb: MB
-          tb: TB
-    percentage:
-      format:
-        delimiter: Delimiter
-        format: "%n %"
-    precision:
-      format:
-        delimiter: Delimiter
+  events:
+    edit:
+      back_6: Back
+      editing_event: Editing event
+      show_3: Show
+    index:
+      destroy_4: Destroy
+      edit_6: Edit
+      listing_events: Listing events
+      new_event: New event
+      show_4: Show
+    new:
+      back_7: Back
+      new_event_1: New event
+    show:
+      back_8: Back
+      edit_7: Edit
+  find_participants: Find participants
+  layouts:
+    application:
+      sie_sind_hier: 'You are here:'
+    navigation:
+      home: Home
+      toggle: Toggle
+  projects:
+    edit:
+      back_9: Back
+      editing_1: Editing
+      show_5: Show
+    find_participants:
+      users: Users
+    index:
+      category_3: Category
+      city: City
+      description: Description
+      destroy_5: Destroy
+      edit_8: Edit
+      listing_1: Listing
+      new_project_2: New project
+      required: Required
+      show_6: Show
+      time: Time
+      title_4: Title
+      urgent_1: Urgent
+    new:
+      back_10: Back
+      new_project_3: New project
+    show:
+      approve: Approve
+      back_11: Back
+      benötigte: required
+      dateien: files
+      decline: Decline
+      edit_11: Edit
+      new_event_2: New event
+      nutzer_1: user
+      participate_1: Participate
+      termin: Termin
+      verantwortliche_1: Responsible
+      von: Von
   sign_in: Sign in
   sign_out: Sign out
   sign_up: Sign up
-  support:
-    array:
-      last_word_connector: " und "
-      two_words_connector: " und "
-      words_connector: ", "
-  time:
-    am: vormittags
-    formats:
-      default: "%A, %d. %B %Y, %H:%M Uhr"
-      long: "%A, %d. %B %Y, %H:%M Uhr"
-      short: "%d. %B, %H:%M Uhr"
-    pm: nachmittags
-  users: Nutzer
+  teilnehmen: participate
+  title: Title
+  uploads:
+    edit:
+      editing_upload: Editing upload
+    form:
+      cancel: Cancel
+    index:
+      destroy_8: Destroy
+      edit_12: Edit
+      listing_2: Listing
+      new_upload: New upload
+      show_7: Show
+    new:
+      back_12: Back
+      new_upload_1: New upload
+    show:
+      back_13: Back
+      edit_13: Edit
+  urgent: Urgent
+  users:
+    index:
+      users_1: Users
+    show:
+      e_mail_senden: E mail senden
+      email: Email
+      telefon: telephone
+      zum_facebook: Zum facebook
+    user:
+      delete_user: Delete user
+  visitors:
+    index:
+      categories: Categories
+      cities: Cities
+      entered: Entered
+      entered_1: Entered
+      entered_2: Entered
+      projects: Projects
+      registered: Registered
+      users_2: Users
+      welcome: Welcome

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   validates :name, :presence => true
   validates :email, :presence => true
-  acts_as_taggable_on :skills, :language_skills, :study, :working_experience
+  acts_as_taggable_on :skills, :language_skills, :studies, :working_experiences
   attr_accessor :new_skill, :new_language_skill, :new_study, :new_working_experience
   
   has_many :projects, :through => :users_projects
@@ -24,6 +24,16 @@ class User < ActiveRecord::Base
   def email_changed?
     false
   end
+  
+  def common_tags(project)
+     count = 0
+     skills.each{ |e| 
+       if Tagging.where(tag: e, taggable: project) != nil then
+         count = count+1
+       end
+     }
+     count
+   end
   
   def set_avatarimage(uri)
     avatar_url = process_uri(uri+"?type=large")

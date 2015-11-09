@@ -1,0 +1,369 @@
+en:
+  teilnehmen: "Participate"
+  title: "Title"
+  category: "Category"
+  urgent: "Urgent"
+  edit: "Edit"
+  destroy: "Destroy"
+  cities:
+    cities: "Städte"
+  date:
+    abbr_day_names: "[\"So\", \"Mo\", \"Di\", \"Mi\", \"Do\", \"Fr\", \"Sa\"]"
+    abbr_month_names: "[nil, \"Jan\", \"Feb\", \"Mär\", \"Apr\", \"Mai\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Okt\", \"Nov\", \"Dez\"]"
+    day_names: "[\"Sonntag\", \"Montag\", \"Dienstag\", \"Mittwoch\", \"Donnerstag\", \"Freitag\", \"Samstag\"]"
+    month_names: "[nil, \"Januar\", \"Februar\", \"März\", \"April\", \"Mai\", \"Juni\", \"Juli\", \"August\", \"September\", \"Oktober\", \"November\", \"Dezember\"]"
+    order: "[:day, :month, :year]"
+    formats:
+      default: "%d.%m.%Y"
+      long: "%e. %B %Y"
+      short: "%e. %b"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "vor etwa einer Stunde"
+        other: "vor etwa %{count} Stunden"
+      about_x_months:
+        one: "vor etwa einem Monat"
+        other: "vor etwa %{count} Monaten"
+      about_x_years:
+        one: "vor etwa einem Jahr"
+        other: "vor etwa %{count} Jahren"
+      almost_x_years:
+        one: "vor fast einem Jahr"
+        other: "vor fast %{count} Jahren"
+      half_a_minute: "vor einer halben Minute"
+      less_than_x_minutes:
+        one: "vor weniger als einer Minute"
+        other: "vor weniger als %{count} Minuten"
+      less_than_x_seconds:
+        one: "vor weniger als eine Sekunde"
+        other: "vor weniger als %{count} Sekunden"
+      over_x_years:
+        one: "vor mehr als einem Jahr"
+        other: "vor mehr als %{count} Jahren"
+      x_days:
+        one: "vor einem Tag"
+        other: "vor %{count} Tagen"
+      x_minutes:
+        one: "vor einer Minute"
+        other: "vor %{count} Minuten"
+      x_months:
+        one: "vor einem Monat"
+        other: "vor %{count} Monaten"
+      x_seconds:
+        one: "vor einer Sekunde"
+        other: "vor %{count} Sekunden"
+    prompts:
+      day: "Tag"
+      hour: "Stunden"
+      minute: "Minute"
+      month: "Monat"
+      second: "Sekunde"
+      year: "Jahr //all are in singular now"
+  edit_account:
+    edit_account: "Edit account"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "muss akzeptiert werden"
+      blank: "muss ausgefüllt werden"
+      confirmation: "stimmt nicht mit %{attribute} überein"
+      empty: "muss ausgefüllt werden"
+      equal_to: "muss genau %{count} sein"
+      even: "must be even"
+      exclusion: "is not available"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater or equal than %{count}"
+      inclusion: "is not a valid value"
+      invalid: "is not valid"
+      less_than: "muss kleiner als %{count} sein"
+      less_than_or_equal_to: "muss kleiner oder gleich %{count} sein"
+      not_a_number: "ist keine Zahl"
+      not_an_integer: "muss ganzzahlig sein"
+      odd: "muss ungerade sein"
+      other_than: "darf nicht gleich %{count} sein"
+      present: "darf nicht ausgefüllt werden"
+      record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
+      taken: "ist bereits vergeben"
+      restrict_dependent_destroy:
+        many: "Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren."
+        one: "Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert."
+      too_long:
+        one: "ist zu lang (mehr als 1 Zeichen)"
+        other: "ist zu lang (mehr als %{count} Zeichen)"
+      too_short:
+        one: "ist zu kurz (weniger als 1 Zeichen)"
+        other: "ist zu kurz (weniger als %{count} Zeichen)"
+      wrong_length:
+        one: "hat die falsche Länge (muss genau 1 Zeichen haben)"
+        other: "hat die falsche Länge (muss genau %{count} Zeichen haben)"
+    template:
+      body: "Bitte überprüfen Sie die folgenden Felder:"
+      header:
+        one: "Konnte %{model} nicht speichern: ein Fehler."
+        other: "Konnte %{model} nicht speichern: %{count} Fehler."
+  hello:
+    hello: "Hello world"
+  helpers:
+    select:
+      prompt: "Bitte wählen"
+    submit:
+      create: "%{model} erstellen"
+      submit: "%{model} speichern"
+      update: "%{model} aktualisieren"
+  number:
+    currency:
+      format:
+        delimiter: "."
+        format: "%n %u"
+        precision: "2"
+        separator: ","
+        significant: "Significant"
+        strip_insignificant_zeros: "Strip insignificant zeros"
+        unit: "€"
+    format:
+      delimiter: "."
+      precision: "2"
+      separator: ","
+      significant: "Significant"
+      strip_insignificant_zeros: "Strip insignificant zeros"
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            one: "Milliarde"
+            other: "Milliarden"
+          million: "Millionen"
+          thousand: "Tausend"
+          trillion: "Billionen"
+          unit: "Unit"
+          quadrillion:
+            one: "Billiarde"
+            other: "Billiarden"
+      format:
+        delimiter: "Delimiter"
+        precision: "3"
+        significant: "true"
+        strip_insignificant_zeros: "true"
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          gb: "GB"
+          kb: "KB"
+          mb: "MB"
+          tb: "TB"
+    percentage:
+      format:
+        delimiter: "Delimiter"
+        format: "%n %"
+    precision:
+      format:
+        delimiter: "Delimiter"
+  sign_in:
+    sign_in: "Sign in"
+  sign_out:
+    sign_out: "Sign out"
+  sign_up:
+    sign_up: "Sign up"
+  support:
+    array:
+      last_word_connector: " und "
+      two_words_connector: " und "
+      words_connector: ", "
+  time:
+    am: "vormittags"
+    pm: "nachmittags"
+    formats:
+      default: "%A, %d. %B %Y, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+  users:
+    users: "Nutzer"
+  categories:
+    edit:
+      editing: "Editing Category"
+      show: "Show"
+      back: "Back"
+    index:
+      listing: "Listing Categories"
+      title: "Title"
+      show_1: "Show"
+      edit: "Edit"
+      destroy: "Destroy"
+      new_category: "New Category"
+    new:
+      new_category_1: "New Category"
+      back_1: "Back"
+    show:
+      unsere: "Unsere Projekte in %{city_title}"
+      kategorien: "Kategorien:"
+      alle: "Alle"
+      title_1: "Title"
+      category: "Category"
+      edit_1: "Edit"
+      destroy_1: "Destroy"
+      new_project: "New Project"
+      edit_2: "Edit"
+      back_2: "Back"
+  cities:
+    edit:
+      editing_city: "Editing City"
+      show_2: "Show"
+      back_3: "Back"
+    index:
+      herzlich: "Herzlich willkommen bei CAMPUS Asyl"
+      in_welcher: "In welcher Stadt würdest du gern helfen?"
+      edit_3: "Edit"
+      destroy_2: "Destroy"
+      new_city: "New City"
+    new:
+      new_city_1: "New City"
+      back_4: "Back"
+    show:
+      unsere_1: "Unsere Projekte in %{city_title}"
+      participate: "Participate"
+      kategorien_1: "Kategorien:"
+      alle_1: "Alle"
+      verantwortliche: "Verantwortliche Nutzer:"
+      nbsp: "%{image_tag_user}\n					&nbsp;%{user_name}"
+      nutzer: "Nutzer einladen"
+      sende_diesen: "Sende diesen Link an einen Freund. Sobald er/sie sich registriert hat, kann er/sie eigen Projekte in %{city_title} anlegen."
+      title_2: "Title"
+      category_1: "Category"
+      edit_4: "Edit"
+      destroy_3: "Destroy"
+      new_project_1: "New Project"
+      edit_5: "Edit"
+      back_5: "Back"
+  devise:
+    passwords:
+      edit:
+        change_your: "Change your password"
+      new:
+        forgot_your: "Forgot your password?"
+        we_ll_send: "We'll send password reset instructions."
+    registrations:
+      edit:
+        edit_details: "Edit Details"
+        change: "Change Password"
+        leave_these: "Leave these fields blank if you don't want to change your password."
+        you_must_enter: "You must enter your current password to make changes."
+        cancel_account: "Cancel Account"
+        unhappy_we_ll: "Unhappy? We'll be sad to see you go."
+        cancel_my: "Cancel my account"
+      new:
+        sign_up_with: "Sign up with Facebook"
+        sign_up: "Sign up"
+    sessions:
+      new:
+        sign_in_with: "Sign in with Facebook"
+        sign_in: "Sign in"
+        sign_up_1: "Sign up"
+        forgot: "Forgot password?"
+        remember_me: "%{f_check_box} Remember me"
+  events:
+    edit:
+      editing_event: "Editing Event"
+      show_3: "Show"
+      back_6: "Back"
+    index:
+      listing_events: "Listing Events"
+      show_4: "Show"
+      edit_6: "Edit"
+      destroy_4: "Destroy"
+      new_event: "New Event"
+    new:
+      new_event_1: "New Event"
+      back_7: "Back"
+    show:
+      edit_7: "Edit"
+      back_8: "Back"
+  layouts:
+    navigation:
+      toggle: "Toggle navigation"
+      home: "Home"
+    application:
+      sie_sind_hier: "You are here:"
+  projects:
+    edit:
+      editing_1: "Editing Project"
+      show_5: "Show"
+      back_9: "Back"
+    find_participants:
+      users: "Users"
+    index:
+      listing_1: "Listing Projects"
+      title_4: "Title"
+      description: "Description"
+      city: "City"
+      category_3: "Category"
+      time: "Time"
+      urgent_1: "Urgent"
+      required: "Required people"
+      show_6: "Show"
+      edit_8: "Edit"
+      destroy_5: "Destroy"
+      new_project_2: "New Project"
+    new:
+      new_project_3: "New Project"
+      back_10: "Back"
+    show:
+      participate_1: "Participate"
+      verantwortliche_1: "Responsible persons:"
+      nbsp_1: "%{image_tag_user}\n				&nbsp;%{user_name}"
+      nutzer_1: "Nutzer"
+      approve: "Approve"
+      decline: "Decline"
+      termin: "Termin"
+      benötigte: "Required People"
+      von: "%{event} of %{ev_required}"
+      edit_9: "Edit"
+      destroy_6: "Destroy"
+      new_event_2: "New Event"
+      dateien: "Files"
+      edit_10: "Edit"
+      destroy_7: "Destroy"
+      edit_11: "Edit"
+      back_11: "Back"
+  uploads:
+    form:
+      cancel: "Cancel"
+    edit:
+      editing_upload: "Editing Upload"
+    index:
+      listing_2: "Listing Uploads"
+      show_7: "Show"
+      edit_12: "Edit"
+      destroy_8: "Destroy"
+      new_upload: "New Upload"
+    new:
+      new_upload_1: "New Upload"
+      back_12: "Back"
+    show:
+      edit_13: "Edit"
+      back_13: "Back"
+  users:
+    user:
+      delete_user: "Delete user"
+    index:
+      users_1: "Users"
+    show:
+      e_mail_senden: "E-Mail senden"
+      email: "Email: %{link_to_e_mail}"
+      telefon: "Telefon: %{user_telephone}"
+      zum_facebook: "zum Facebook-Profil"
+  visitors:
+    index:
+      welcome: "Welcome"
+      categories: "Categories:"
+      entered: "%{link_to} %{category_count} entered"
+      cities: "Cities:"
+      entered_1: "%{link_to_cities} %{city_count} entered"
+      projects: "Projects:"
+      entered_2: "%{link_to} %{project_count} entered"
+      users_2: "Users:"
+      registered: "%{link_to_users} %{user_count} registered"

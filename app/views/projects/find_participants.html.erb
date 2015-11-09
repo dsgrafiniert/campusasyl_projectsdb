@@ -1,11 +1,11 @@
   <div class="row">
 	<div class="col-md-12">
-    <h3><%= t '.users_1' %></h3>
+    <h3><%= t '.users' %></h3>
       <table class="table table-striped">
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <%= render user %>
+              <%= render partial:"users/user_for_project", locals: {user: user, project: @project} %>
             </tr>
           <% end %>
         </tbody>

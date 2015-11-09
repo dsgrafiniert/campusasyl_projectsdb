@@ -1,5 +1,5 @@
 <div class="authform form-horizontal">
-  <h3>Edit Details</h3>
+  <h3><%= t '.edit_details' %></h3>
   <%= simple_form_for(resource, :as => resource_name, :html => { :multipart => true, :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     <div class="form-group">
@@ -91,12 +91,12 @@
 </div>
 
 <div class="authform">
-  <h3>Change Password</h3>
+  <h3><%= t '.change' %></h3>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     
     <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
+      <p><%= t '.leave_these' %></p>
       <div class="form-group">
         <%= f.label :password %>
         <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
@@ -107,7 +107,7 @@
       </div>
     </fieldset>
     <fieldset>
-      <p>You must enter your current password to make changes.</p>
+      <p><%= t '.you_must_enter' %></p>
       <div class="form-group">
         <%= f.label :current_password %>
         <%= f.password_field :current_password, class: 'form-control' %>
@@ -117,7 +117,7 @@
   <% end %>
 </div>
 <div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
+<h3><%= t '.cancel_account' %></h3>
+<p><%= t '.unhappy_we_ll' %></p>
+<%= button_to (t '.cancel_my'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right' %>
 </div>

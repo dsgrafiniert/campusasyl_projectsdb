@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Uploads</h1>
+<h1><%= t '.listing_2' %></h1>
 
 <table>
   <thead>
@@ -12,9 +12,9 @@
   <tbody>
     <% @uploads.each do |upload| %>
       <tr>
-        <td><%= link_to 'Show', upload %></td>
-        <td><%= link_to 'Edit', edit_upload_path(upload) %></td>
-        <td><%= link_to 'Destroy', upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (t '.show_7'), upload %></td>
+        <td><%= link_to (t '.edit_12'), edit_upload_path(upload) %></td>
+        <td><%= link_to (t '.destroy_8'), upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Upload', new_upload_path %>
+<%= link_to (t '.new_upload'), new_upload_path %>

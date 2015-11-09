@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006044619) do
+ActiveRecord::Schema.define(version: 20151022181034) do
 
   create_table "attends", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 20151006044619) do
     t.datetime "updated_at",     null: false
     t.string   "invitationHash"
   end
+
+  create_table "city_participations", force: :cascade do |t|
+    t.integer  "status"
+    t.integer  "participant_id"
+    t.integer  "city_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "city_participations", ["city_id"], name: "index_city_participations_on_city_id"
+  add_index "city_participations", ["participant_id"], name: "index_city_participations_on_participant_id"
 
   create_table "event_occurrences", force: :cascade do |t|
     t.integer  "event_id"

@@ -12,4 +12,9 @@ module ProjectsHelper
     "/projects/#{project.id}/decline/#{participant.id}"
   end
   
+  def find_participants_project_path(project)
+    "/projects/#{project.id}/find_participants"
+    
+  end
+  
 end

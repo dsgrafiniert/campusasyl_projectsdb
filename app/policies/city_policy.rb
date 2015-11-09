@@ -9,6 +9,10 @@ class CityPolicy
   def index?
     return true
   end
+  
+  def new?
+    @current_user.admin?
+  end
 
   def show?
     return true

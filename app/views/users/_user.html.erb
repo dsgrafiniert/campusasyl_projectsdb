@@ -1,6 +1,7 @@
 <td>
   <%= link_to user.email, user %>
 </td>
+<% if current_user.try(:admin?) %>
 <td>
   <%= form_for(user, :html => { :multipart => true }) do |f| %>
     <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
@@ -8,5 +9,6 @@
   <% end %>
 </td>
 <td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+  <%= link_to((t '.delete_user'), user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
 </td>
+<% end %>

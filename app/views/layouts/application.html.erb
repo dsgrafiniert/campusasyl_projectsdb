@@ -16,8 +16,8 @@
     <main role="main">
 		<br /> <br /><div class="container">
 			<ol class="breadcrumb">
-			Sie sind hier:	<li><%= link_to t(:cities), cities_path()%></li>
-			  <% if @city || @project || @event %>			
+			<%= t '.sie_sind_hier' %>	<li><%= link_to t(:cities_overview), cities_path()%></li>
+			  <% if (@city && @city.id != nil) || (@project && @project.id != nil) || (@event && @event.id != nil) %>			
 				<li>
 				<% if @city %> <%= link_to @city.title, city_path(@city)%> 
 				<% elsif @project %> <%= link_to @project.city.title, city_path(@project.city)%>
@@ -25,7 +25,7 @@
 				<% elsif @event.is_a? EventOccurrence %> <%= link_to @event.event.project.city.title, city_path(@event.event.project.city)%>				
 				<% end %>
 				</li>
-			  <% if @project || @event %>
+			  <% if (@project && @project.id != nil) || (@event && @event.id != nil) %>
 			<li>
 				<% if @project %> <%= link_to @project.title, project_path(@project)%>
 				<% elsif @event.is_a? Event %> <%= link_to @event.project.title, project_path(@event.project)%>

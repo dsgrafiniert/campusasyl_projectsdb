@@ -8,6 +8,8 @@ class Project < ActiveRecord::Base
   has_many :participants, :through => :participations, :class_name => 'User'
   has_many :participations
   accepts_nested_attributes_for :users, :users_projects, :participants, :participations
+  acts_as_taggable_on :skills, :language_skills, :studies, :working_experiences
+  attr_accessor :new_skill, :new_language_skill, :new_study, :new_working_experience
   
   def has_view_permission?(user)
     if !is_private || (!user.nil? && (participations.where(:status => 0).collect{ | part | part.participant }.include?(user) || user.try(:admin?)))

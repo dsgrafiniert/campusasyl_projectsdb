@@ -1,20 +1,25 @@
-<h1>Unsere Projekte in <%= @city.title %></h1>
+<h1><%= t('.unsere_1', city_title: @city.title) %></h1>
 
 <div class="row">
 <div class="col-md-3">
-	<h3>Kategorien:</h3>
-	<%= link_to "Alle", city_path(@city) %>
+	
+	<% if (!@city.participants.include?(current_user)) %>
+	<p><%= link_to (t '.participate'), participate_city_path(@city), :class=> 'btn btn-default'%></p>
+	<% end %>
+	
+	<h3><%= t '.kategorien_1' %></h3>
+	<%= link_to (t '.alle_1'), city_path(@city) %>
 	
 	<%= render :partial => 'categories', :locals => {:categories => @categories} %>
+	<% if (@city.participants.include?(current_user)) %>
 	
-	<h4>Verantwortliche Nutzer:</h4>
+	<h4><%= t '.verantwortliche' %></h4>
 	<ul class="list-group">
 		<% @city.users.each do |user| %>
 			
 			<% if user_signed_in? %>
 				<a class="list-group-item clearfix" href="<%=user_url(user) %>">
-					<%=image_tag user.avatar.url(:thumb), :class => "pull-left" %>
-					&nbsp;<%=user.name %>
+					<%= raw(t'.responsible_user', :image_tag_user => (image_tag user.avatar.url(:thumb), :class => "pull-left"), :user_name => (user.name)) %>
 				</a>
 			<% else %>
 				<li class="list-group-item">
@@ -23,18 +28,22 @@
 			<% end %>
 		<% end %>
 	</ul>
+	<% end %>
+	
 	<% if user_signed_in? %>
 	  <% if current_user.try(:admin?) || @city.users.include?(current_user) %>
-<h4>Nutzer einladen</h4>
+<!--<h4><%= t '.nutzer' %></h4>
 <p><%=link_to request.base_url+invite_city_path(@city), invite_city_path(@city)%></p>
-<p>Sende diesen Link an einen Freund. Sobald er/sie sich registriert hat, kann er/sie eigen Projekte in <%= @city.title %> anlegen.</p>	<% end %><% end %>
+<p><%= t '.sende_diesen', :city_title => (@city.title) %></p>	
+-->
+<% end %><% end %>
 </div>
 <div class="col-md-9">
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Category</th>
+      <th><%= t '.title_2' %></th>
+      <th><%= t '.category_1' %></th>
 	<% if user_signed_in? %>
 	  <% if current_user.try(:admin?) %>
       <th colspan="2"></th>
@@ -49,8 +58,8 @@
         <td><%= link_to project.category.title, project %></td>
 		<% if user_signed_in? %>
 		  <% if current_user.try(:admin?) %>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to (t '.edit_4'), edit_project_path(project) %></td>
+        <td><%= link_to (t '.destroy_3'), project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<% end %><% end %>
 
       </tr>
@@ -61,7 +70,7 @@
 <br>
 	<% if user_signed_in? %>
 	  <% if current_user.try(:admin?) || @city.users.include?(@current_user) %>
-<%= link_to 'New Project', new_project_path(city_id: @city.id)  %>
+<%= link_to (t '.new_project_1'), new_project_path(city_id: @city.id)  %>
 <% end %><% end %>
 
 </div>
@@ -70,6 +79,6 @@
 
 <% if user_signed_in? %>
   <% if current_user.try(:admin?) %>
-<%= link_to 'Edit', edit_city_path(@city) %> |
+<%= link_to (t '.edit_5'), edit_city_path(@city) %> |
 <% end %><% end %>
-<%= link_to 'Back', cities_path %>
+<%= link_to (t '.back_5'), cities_path %>

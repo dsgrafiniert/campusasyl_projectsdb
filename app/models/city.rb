@@ -3,7 +3,9 @@ class City < ActiveRecord::Base
   has_many :users, -> { distinct }, :through => :users_cities
    has_many :users_cities
    has_many :projects
-   accepts_nested_attributes_for :users, :users_cities
+   has_many :participants, :through => :city_participations, :class_name => 'User'
+   has_many :city_participations
+   accepts_nested_attributes_for :users, :users_cities, :participants, :city_participations
    
    before_create :generate_token
    
