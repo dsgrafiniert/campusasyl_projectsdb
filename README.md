@@ -36,43 +36,44 @@ Setup
 
 To easily aquire the correct ruby version, run (on mac)
 
-'''
+```
 brew install rbenv
 brew install ruby build
-'''
+```
 
 and restart your terminal.
 
 Then install ruby with
 
-'''
+```
 rbenv local 2.2.2
 rbenv install
-'''
+```
 
 To setup the project after checkout, run
 
-'''
+```
 gem install bundler
 bundle install
-'''
+```
 
 Then init the database by running
-'''
+
+```
 rake db:setup
-'''
+```
 
 To run the project, intall POW (http://pow.cx):
 
-'''
+```
 curl get.pow.cx | sh
-'''
+```
 
 and symlink it with
 
-'''
+```
 ln -s $(pwd) ~/.pow/$(basename $(pwd))
-'''
+```
 
 You should then be able to access the application in http://campusasyl_projectsdb.dev
 
