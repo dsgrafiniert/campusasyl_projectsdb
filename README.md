@@ -29,6 +29,53 @@ Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.
 Getting Started
 ---------------
 
+This project is a ruby on rails planning tool to help with the organization of refugee support, e.g. language courses.
+
+Setup
+---------------
+
+To easily aquire the correct ruby version, run (on mac)
+
+'''
+brew install rbenv
+brew install ruby build
+'''
+
+and restart your terminal.
+
+Then install ruby with
+
+'''
+rbenv local 2.2.2
+rbenv install
+'''
+
+To setup the project after checkout, run
+
+'''
+gem install bundler
+bundle install
+'''
+
+Then init the database by running
+'''
+rake db:setup
+'''
+
+To run the project, intall POW (http://pow.cx):
+
+'''
+curl get.pow.cx | sh
+'''
+
+and symlink it with
+
+'''
+ln -s $(pwd) ~/.pow/$(basename $(pwd))
+'''
+
+You should then be able to access the application in http://campusasyl_projectsdb.dev
+
 Documentation and Support
 -------------------------
 
@@ -38,6 +85,9 @@ Issues
 Similar Projects
 ----------------
 
+https://github.com/engelsystem/engelsystem/
+https://github.com/coders4help/volunteer_planner
+
 Contributing
 ------------
 
@@ -46,3 +96,5 @@ Credits
 
 License
 -------
+
+This project is published using the MIT License
