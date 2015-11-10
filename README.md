@@ -38,7 +38,7 @@ To easily aquire the correct ruby version, run (on mac)
 
 ```
 brew install rbenv
-brew install ruby build
+brew install ruby-build
 ```
 
 and restart your terminal.
