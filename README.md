@@ -69,7 +69,7 @@ To run the project, intall POW (http://pow.cx):
 curl get.pow.cx | sh
 ```
 
-and symlink it with
+and symlink it by running this from the project's root:
 
 ```
 ln -s $(pwd) ~/.pow/$(basename $(pwd))
