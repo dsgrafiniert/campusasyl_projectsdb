@@ -38,7 +38,7 @@ To easily aquire the correct ruby version, run (on mac)
 
 ```
 brew install rbenv
-brew install ruby build
+brew install ruby-build
 ```
 
 and restart your terminal.
@@ -69,7 +69,7 @@ To run the project, intall POW (http://pow.cx):
 curl get.pow.cx | sh
 ```
 
-and symlink it with
+and symlink it by running this from the project's root:
 
 ```
 ln -s $(pwd) ~/.pow/$(basename $(pwd))
