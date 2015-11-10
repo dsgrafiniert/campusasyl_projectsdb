@@ -33,3 +33,7 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+
+# ignore uploads folder
+/public/uploads
