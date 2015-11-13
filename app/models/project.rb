@@ -19,8 +19,6 @@ class Project < ActiveRecord::Base
   acts_as_taggable_on :skills, :language_skills, :studies, :working_experiences
   attr_accessor :new_skill, :new_language_skill, :new_study, :new_working_experience
 
-  accepts_nested_attributes_for :users, :users_projects, :participants, :participations
-
   has_many :users, -> { distinct }, :through => :users_projects
   has_many :users_projects
   has_many :events
@@ -30,6 +28,8 @@ class Project < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :category
+
+  accepts_nested_attributes_for :users, :users_projects, :participants, :participations
 
   def has_view_permission?(user)
     if !is_private || (!user.nil? && (participations.where(:status => 0).collect{ | part | part.participant }.include?(user) || user.try(:admin?)))
