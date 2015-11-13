@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
+
 gem 'rails', '4.2.4'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
@@ -15,19 +16,25 @@ gem 'ice_cube'
 gem 'schedulable'
 gem 'http_accept_language'
 gem 'i18n-tasks'
-group :development, :test do
-  gem 'byebug'
-end
-group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-end
+
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'pundit'
 gem 'simple_form'
+
+
+group :development, :test do
+  gem 'byebug'
+  gem "annotate"
+  gem "guard"
+  gem "guard-rspec"
+end
+
 group :development do
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
+
   gem 'better_errors'
   gem 'capistrano', '~> 3.0.1'
   gem 'capistrano-bundler'

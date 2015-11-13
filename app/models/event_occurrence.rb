@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: event_occurrences
+#
+#  id               :integer          not null, primary key
+#  event_id         :integer
+#  date             :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  schedulable_id   :integer
+#  schedulable_type :integer
+#
+
 class EventOccurrence < ActiveRecord::Base
   has_many :users, -> { distinct }, :through => :attends
   has_many :attends

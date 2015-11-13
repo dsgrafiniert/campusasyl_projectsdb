@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id              :integer          not null, primary key
+#  title           :string
+#  description     :text
+#  city_id         :integer
+#  category_id     :integer
+#  time            :datetime
+#  urgent          :boolean
+#  required_people :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  is_private      :boolean
+#
+
 class Project < ActiveRecord::Base
   belongs_to :city
   belongs_to :category
