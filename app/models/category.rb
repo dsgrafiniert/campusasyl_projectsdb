@@ -10,7 +10,7 @@
 #
 
 class Category < ActiveRecord::Base
+  has_many :children, :dependent => :destroy, :class_name => 'Category'
+
   belongs_to :category
-    has_many :children, :dependent => :destroy, :class_name => 'Category'
-  
 end

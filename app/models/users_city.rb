@@ -11,8 +11,8 @@
 #
 
 class UsersCity < ActiveRecord::Base
+  enum status: [:leader, :regular]
+
   belongs_to :user
   belongs_to :city
-  enum status: [:leader, :regular]
-  
 end
