@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
   def participate
     authorize @project, :participate?
 
-    @participation = Participation.where(:project => @project, :user => current_user).first_or_create
+    @participation = Participation.where(:project => @project, :participant => current_user).first_or_create
 
     if @project.is_private
       @participation.status=:applied
