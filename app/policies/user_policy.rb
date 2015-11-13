@@ -7,10 +7,10 @@ class UserPolicy< ApplicationPolicy
     end
 
     def resolve
-      if @user.admin?
+      if @user.try(:admin?)
         @scope
       else
-        @scope
+        @scope = CityParticipation.where("city_id IN (?)", UsersCity.where(:user => current_user).collect{|e| e.city}.flatten.collect{|e| e.id}.join(', ')).collect{|e| e.participant}.flatten
       end
     end
   end

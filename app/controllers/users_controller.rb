@@ -1,15 +1,10 @@
 class UsersController < ApplicationController
   include ActsAsTaggableOn::TagsHelper
-  
+
   before_action :authenticate_user!
-  after_action :verify_authorized
 
   def index
-    if current_user.try(:admin?)
-      @users = User.all
-    else
-      @users = CityParticipation.where("city_id IN (?)", UsersCity.where(:user => current_user).collect{|e| e.city}.flatten.collect{|e| e.id}.join(', ')).collect{|e| e.participant}.flatten
-    end
+    @users = policy_scope(User.all)
     authorize User
   end
 
@@ -17,9 +12,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize @user
   end
-  
- 
-
 
   def update
     @user = User.find(params[:id])
@@ -27,19 +19,19 @@ class UsersController < ApplicationController
     if params[:user].has_key?(:new_skill) && params[:user][:new_skill] != nil && params[:user][:new_skill] != ""
       params[:user][:skill_list] << params[:user][:new_skill]
     end
-    
+
     if params[:user].has_key?(:new_language_skill) && params[:user][:new_language_skill] != nil && params[:user][:new_language_skill] != ""
       params[:user][:language_skill_list] << params[:user][:new_language_skill]
     end
-    
+
     if params[:user].has_key?(:new_working_experience) && params[:user][:new_working_experience] != nil && params[:user][:new_working_experience] != ""
       params[:user][:working_experience_list] << params[:user][:new_working_experience]
     end
-    
+
     if params[:user].has_key?(:new_study) && params[:user][:new_study] != nil && params[:user][:new_study] != ""
       params[:user][:study_list] << params[:user][:new_study]
     end
-    
+
     if @user.update(secure_params)
       redirect_to user_path(@user), :notice => "User updated."
     else
