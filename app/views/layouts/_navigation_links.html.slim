@@ -1,6 +1,7 @@
 - # add navigation links to this file
 li
   = link_to t(:cities_overview), cities_path
+
 - if user_signed_in?
   - if current_user.try(:admin?)
     li

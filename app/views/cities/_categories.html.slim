@@ -5,5 +5,6 @@ ul.list-group
         h5
           =link_to cat.title, category_path(cat, :city_id => @city.id)
         = render :partial => 'categories', :locals => {:categories => cat.children}
+
       - else
         =link_to cat.title, category_path(cat, :city_id => @city.id)

@@ -8,10 +8,13 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
+
       = link_to (t '.home'), root_path, class: 'navbar-brand'
+
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         = render 'layouts/navigation_links'
+
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           li

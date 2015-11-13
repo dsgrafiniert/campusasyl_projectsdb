@@ -15,9 +15,7 @@ h1
       ul.list-group
         - @city.users.each do |user|
           - if user_signed_in?
-            |  <a class="list-group-item clearfix" href="
-            =user_url(user)
-            | "> 
+            a class="list-group-item clearfix" href=user_url(user)
             = raw(t'.responsible_user', :image_tag_user => (image_tag user.avatar.url(:thumb), :class => "pull-left"), :user_name => (user.name))
           - else
             li.list-group-item
@@ -38,10 +36,11 @@ h1
               th[colspan="2"]
       tbody
         - @projects.each do |project|
-          |  <tr 
           - if project.urgent == true
-            |  class="danger"
-          | > 
+            tr.danger
+          -else
+            tr
+
           td
             = link_to project.title, project
           td
@@ -56,8 +55,11 @@ h1
     - if user_signed_in?
       - if current_user.try(:admin?) || @city.users.include?(@current_user)
         = link_to (t '.new_project_1'), new_project_path(city_id: @city.id)
+
+
 - if user_signed_in?
   - if current_user.try(:admin?)
     = link_to (t '.edit_5'), edit_city_path(@city)
-    |  | 
+
+
 = link_to (t '.back_5'), cities_path

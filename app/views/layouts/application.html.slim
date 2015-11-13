@@ -6,7 +6,7 @@ html
       = content_for?(:title) ? yield(:title) : "Deutschland hilft"
     |  <meta name="description" content="
     = content_for?(:description) ? yield(:description) : "Rails Devise"
-    | "> 
+    | ">
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -21,6 +21,7 @@ html
           = t '.sie_sind_hier'
           li
             = link_to t(:cities_overview), cities_path()
+
           - if (@city && @city.id != nil) || (@project && @project.id != nil) || (@event && @event.id != nil)
             li
               - if @city
@@ -31,6 +32,7 @@ html
                 = link_to @event.project.city.title, city_path(@event.project.city)
               - elsif @event.is_a? EventOccurrence
                 = link_to @event.event.project.city.title, city_path(@event.event.project.city)
+
             - if (@project && @project.id != nil) || (@event && @event.id != nil)
               li
                 - if @project
@@ -39,5 +41,7 @@ html
                   = link_to @event.project.title, project_path(@event.project)
                 - elsif @event.is_a? EventOccurrence
                   = link_to @event.event.project.title, project_path(@event.event.project)
+
+
         = render 'layouts/messages'
         = yield

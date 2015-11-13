@@ -6,9 +6,11 @@ p#notice
       - @categories.each do |cat|
         li.list-group-item
           = cat.title
+
   .col-md-9
     h1
       = t '.listing_1'
+
     table.table.table-striped
       thead
         tr
@@ -50,5 +52,6 @@ p#notice
               = link_to (t '.edit_8'), edit_project_path(project)
             td
               = link_to (t '.destroy_5'), project, method: :delete, data: { confirm: 'Are you sure?' }
+
     br
     = link_to (t '.new_project_2'), new_project_path

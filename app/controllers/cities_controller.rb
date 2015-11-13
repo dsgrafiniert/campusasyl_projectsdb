@@ -7,12 +7,12 @@ class CitiesController < ApplicationController
   def index
     @cities = City.all
     authorize City
-    
   end
 
   # GET /cities/1
   # GET /cities/1.json
   def show
+    authorize @city, :show?
     @projects = @city.projects.order('urgent DESC, title')
     @categories = Category.where(:category => nil)
   end
@@ -21,15 +21,14 @@ class CitiesController < ApplicationController
   def new
     @city = City.new
     authorize City
-    
   end
 
   # GET /cities/1/edit
   def edit
     authorize City
-    
+
   end
-  
+
   def invite
   end
 
@@ -53,7 +52,7 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1.json
   def update
     authorize @city
-    
+
     respond_to do |format|
       if @city.update(city_params)
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
@@ -74,10 +73,10 @@ class CitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def participate
        @participation = CityParticipation.where(:city => @city, :participant => current_user).first_or_create
-      
+
          @participation.status=:approved
         respond_to do |format|
            if @participation.save

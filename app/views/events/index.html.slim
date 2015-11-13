@@ -2,6 +2,7 @@ p#notice
   = notice
 h1
   = t '.listing_events'
+
 table
   thead
     tr
@@ -15,5 +16,6 @@ table
           = link_to (t '.edit_6'), edit_event_path(event)
         td
           = link_to (t '.destroy_4'), event, method: :delete, data: { confirm: 'Are you sure?' }
+
 br
 = link_to (t '.new_event'), new_event_path

@@ -1,9 +1,11 @@
 = simple_form_for(@event) do |f|
   = f.error_notification
+
   .form-inputs
     .field
       = f.input :schedule, as: :schedule
     = f.input :required_people
     = f.association :project
+
   .form-actions
     = f.button :submit
