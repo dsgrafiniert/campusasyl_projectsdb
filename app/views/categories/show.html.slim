@@ -1,0 +1,46 @@
+h1
+  = t '.unsere', :city_title => (@city.title)
+  small
+    = @category.title
+.row
+  .col-md-3
+    h3
+      = t '.kategorien'
+    = link_to (t '.alle'), city_path(@city)
+    = render :partial => 'categories', :locals => {:categories => @categories}
+  .col-md-9
+    table.table.table-striped
+      thead
+        tr
+          th
+            = t '.title_1'
+          th
+            = t '.category'
+          - if user_signed_in?
+            - if current_user.try(:admin?)
+              th[colspan="2"]
+      tbody
+        - @projects.each do |project|
+          |  <tr 
+          - if project.urgent == true
+            |  class="danger"
+          | > 
+          td
+            = link_to project.title, project
+          td
+            = link_to project.category.title, project
+          - if user_signed_in?
+            - if current_user.try(:admin?)
+              td
+                = link_to (t '.edit_1'), edit_project_path(project)
+              td
+                = link_to (t '.destroy_1'), project, method: :delete, data: { confirm: 'Are you sure?' }
+    br
+    - if user_signed_in?
+      - if current_user.try(:admin?)
+        = link_to (t '.new_project'), new_project_path(city_id: @city.id)
+- if user_signed_in?
+  - if current_user.try(:admin?)
+    = link_to (t '.edit_2'), edit_city_path(@city)
+    |  | 
+= link_to (t '.back_2'), cities_path

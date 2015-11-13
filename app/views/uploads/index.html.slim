@@ -1,0 +1,19 @@
+p#notice
+  = notice
+h1
+  = t '.listing_2'
+table
+  thead
+    tr
+      th[colspan="3"]
+  tbody
+    - @uploads.each do |upload|
+      tr
+        td
+          = link_to (t '.show_7'), upload
+        td
+          = link_to (t '.edit_12'), edit_upload_path(upload)
+        td
+          = link_to (t '.destroy_8'), upload, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to (t '.new_upload'), new_upload_path

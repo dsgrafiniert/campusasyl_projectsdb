@@ -1,0 +1,63 @@
+h1
+  = t('.unsere_1', city_title: @city.title)
+.row
+  .col-md-3
+    - if (!@city.participants.include?(current_user))
+      p
+        = link_to (t '.participate'), participate_city_path(@city), :class=> 'btn btn-default'
+    h3
+      = t '.kategorien_1'
+    = link_to (t '.alle_1'), city_path(@city)
+    = render :partial => 'categories', :locals => {:categories => @categories}
+    - if (@city.participants.include?(current_user))
+      h4
+        = t '.verantwortliche'
+      ul.list-group
+        - @city.users.each do |user|
+          - if user_signed_in?
+            |  <a class="list-group-item clearfix" href="
+            =user_url(user)
+            | "> 
+            = raw(t'.responsible_user', :image_tag_user => (image_tag user.avatar.url(:thumb), :class => "pull-left"), :user_name => (user.name))
+          - else
+            li.list-group-item
+              = user.name
+    - if user_signed_in?
+      - if current_user.try(:admin?) || @city.users.include?(current_user)
+
+  .col-md-9
+    table.table.table-striped
+      thead
+        tr
+          th
+            = t '.title_2'
+          th
+            = t '.category_1'
+          - if user_signed_in?
+            - if current_user.try(:admin?)
+              th[colspan="2"]
+      tbody
+        - @projects.each do |project|
+          |  <tr 
+          - if project.urgent == true
+            |  class="danger"
+          | > 
+          td
+            = link_to project.title, project
+          td
+            = link_to project.category.title, project
+          - if user_signed_in?
+            - if current_user.try(:admin?)
+              td
+                = link_to (t '.edit_4'), edit_project_path(project)
+              td
+                = link_to (t '.destroy_3'), project, method: :delete, data: { confirm: 'Are you sure?' }
+    br
+    - if user_signed_in?
+      - if current_user.try(:admin?) || @city.users.include?(@current_user)
+        = link_to (t '.new_project_1'), new_project_path(city_id: @city.id)
+- if user_signed_in?
+  - if current_user.try(:admin?)
+    = link_to (t '.edit_5'), edit_city_path(@city)
+    |  | 
+= link_to (t '.back_5'), cities_path

@@ -1,0 +1,7 @@
+= simple_form_for(@category) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :title
+    = f.association :category
+  .form-actions
+    = f.button :submit

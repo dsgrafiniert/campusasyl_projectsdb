@@ -1,0 +1,77 @@
+.authform.form-horizontal
+  h3
+    = t '.edit_details'
+  = simple_form_for(resource, :as => resource_name, :html => { :multipart => true, :method => :put, :role => 'form'}) do |f|
+    = devise_error_messages!
+    .form-group
+      = f.label :name, :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_field :name, :autofocus => true, class: 'form-control'
+    .form-group
+      = f.label :email , :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_field :email, class: 'form-control'
+    .form-group
+      = f.label :avatar, :class => "col-sm-2 control-label"
+      .col-sm-10
+        .input-group.col-sm-12[style="height: 50px;"]
+          | <span class="input-group-addon" id="basic-addon1" style="width:50px; height: 50px; background: url(
+          = resource.avatar.url(:thumb)
+          | )">
+          = f.file_field :avatar, {class: "form-control", 'aria-describedby': "basic-addon1", style: "height: 50px; line-height: 36px;"}
+    .form-group
+      = f.label :language_skills, :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.input_field :language_skill_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "language_skills").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_language_skill
+        = f.text_field "new_language_skill", class: "form-control", 'data-role': "tagsinput"
+    .form-group
+      = f.label :studies , :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.input_field :study_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "study").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_study
+        = f.text_field "new_study", class: "form-control", 'data-role': "tagsinput"
+    .form-group
+      = f.label :working_experience, :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.input_field :working_experience_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "working_experience").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_working_experience
+        = f.text_field "new_working_experience", class: "form-control", 'data-role': "tagsinput"
+    .form-group
+      = f.label :skills, :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.input_field :skill_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "skills").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_skill
+        = f.text_field "new_skill", class: "form-control", 'data-role': "tagsinput"
+    .form-group
+      = f.label :telephone , :class => "col-sm-2 control-label"
+      .col-sm-10
+        = f.text_field :telephone, class: "form-control"
+    = f.submit 'Update', :class => 'button right'
+.authform
+  h3
+    = t '.change'
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
+    = devise_error_messages!
+    fieldset
+      p
+        = t '.leave_these'
+      .form-group
+        = f.label :password
+        = f.password_field :password, :autocomplete => 'off', class: 'form-control'
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+    fieldset
+      p
+        = t '.you_must_enter'
+      .form-group
+        = f.label :current_password
+        = f.password_field :current_password, class: 'form-control'
+    = f.submit 'Update', :class => 'button right'
+.authform
+  h3
+    = t '.cancel_account'
+  p
+    = t '.unhappy_we_ll'
+  = button_to (t '.cancel_my'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button right'
