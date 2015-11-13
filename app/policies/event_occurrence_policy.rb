@@ -1,13 +1,18 @@
 class EventOccurrencePolicy
-  attr_reader :current_user, :model
+  class Scope < Struct.new(:user, :scope)
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
 
-  def initialize(current_user, model)
-    @current_user = current_user
-    @event = model
-  end
-
-  def index?
-    return true
+    def resolve
+      if @user.admin?
+        @scope
+      else
+        @scope
+      end
+    end
   end
 
   def new?
@@ -17,7 +22,7 @@ class EventOccurrencePolicy
   def show?
     return true
   end
-  
+
   def attend?
     return (!(@event.event.project.is_private) || @event.event.project.participants.include?(@current_user))
   end
@@ -25,7 +30,7 @@ class EventOccurrencePolicy
   def update?
     @current_user.admin?
   end
-  
+
   def edit?
     @current_user.admin?
   end

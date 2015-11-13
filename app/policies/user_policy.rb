@@ -1,9 +1,18 @@
 class UserPolicy
-  attr_reader :current_user, :model
+  class Scope < Struct.new(:user, :scope)
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
 
-  def initialize(current_user, model)
-    @current_user = current_user
-    @user = model
+    def resolve
+      if @user.admin?
+        @scope
+      else
+        @scope
+      end
+    end
   end
 
   def index?

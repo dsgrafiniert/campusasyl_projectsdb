@@ -1,23 +1,28 @@
 class CategoryPolicy
-  attr_reader :current_user, :model
+  class Scope < Struct.new(:user, :scope)
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
 
-  def initialize(current_user, model)
-    @current_user = current_user
-    @category = model
+    def resolve
+      if @user.admin?
+        @scope
+      else
+        @scope
+      end
+    end
   end
-
-  def index?
-    return true
-  end
-
+  
   def show?
     return true
   end
-  
+
   def new?
     @current_user.admin?
   end
-  
+
   def create?
     @current_user.admin?
   end
@@ -25,7 +30,7 @@ class CategoryPolicy
   def update?
     @current_user.admin?
   end
-  
+
   def edit?
     @current_user.admin?
   end

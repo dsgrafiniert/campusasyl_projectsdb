@@ -1,39 +1,29 @@
 class EventOccurrencesController < ApplicationController
-  
   before_action :set_event_occurrence, only: [:show, :edit, :update, :destroy, :attend]
-   before_action :authenticate_user!, only: [:edit, :update, :destroy, :attend]
-   after_action :verify_authorized, only: [:edit, :update, :destroy, :attend]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :attend]
 
-   # GET /cities
-   # GET /cities.json
-   def index
-     @events = EventOccurrence.all
-     authorize EventOccurrence
+  def index
+    @events = policy_scope(EventOccurrence.all)
+  end
 
-   end
+  def show
+    authorize @event, :show?
+  end
 
-   # GET /cities/1
-   # GET /cities/1.json
-   def show
+  def edit
+    authorize @event, :edit?
+  end
 
-   end
+  def attend
+    authorize @event, :attend?
+    if @event.attends.count < @event.event.required_people
+      @attend = @event.attends.build(:user => current_user)
 
-
-   # GET /cities/1/edit
-   def edit
-     authorize EventOccurrence
-
-   end
-   
-   def attend
-     authorize @event
-     if @event.attends.count < @event.event.required_people
-     @attend = @event.attends.build(:user => current_user)
-     if (! @event.event.event_occurrences.map{|occ| occ.users}.flatten.include?(current_user))
-       @attend.status = :newbie
-     else 
-       @attend.status = :regular
-     end
+      if (! @event.event.event_occurrences.map{|occ| occ.users}.flatten.include?(current_user))
+        @attend.status = :newbie
+      else
+        @attend.status = :regular
+      end
 
       respond_to do |format|
         if @attend.save
@@ -44,70 +34,67 @@ class EventOccurrencesController < ApplicationController
           format.json { render json: @attend.errors, status: :unprocessable_entity }
         end
       end
-    else 
+
+    else
       respond_to do |format|
-          format.html { redirect_to @event, notice: 'This event is already full. Thanks for your help, do you have time at any other date?.' }
-          format.json { render :show, status: :error, location: @event }
-        
+        format.html { redirect_to @event, notice: 'This event is already full. Thanks for your help, do you have time at any other date?.' }
+        format.json { render :show, status: :error, location: @event }
       end
+    end
+  end
+
+
+  def create
+    @event = EventOccurrence.new(event_occurrence_params)
+    authorize @event, :create?
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event.project, notice: 'Event was successfully created.' }
+        format.json { render :show, status: :created, location: @event }
+      else
+        format.html { render :new }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
-   end
+    end
+  end
 
-   # POST /cities
-   # POST /cities.json
-   def create
-     @event = EventOccurrence.new(event_occurrence_params)
+  def update
+    authorize @event, :update?
 
-     respond_to do |format|
-       if @event.save
-         format.html { redirect_to @event.project, notice: 'Event was successfully created.' }
-         format.json { render :show, status: :created, location: @event }
-       else
-         format.html { render :new }
-         format.json { render json: @event.errors, status: :unprocessable_entity }
-       end
-     end
-   end
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to @event, notice: 'event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
-   # PATCH/PUT /cities/1
-   # PATCH/PUT /cities/1.json
-   def update
-     authorize @event
+  def destroy
+    authorize @event, :destroy?
+    project = @event.event.project
+    @event.destroy
 
-     respond_to do |format|
-       if @event.update(event_params)
-         format.html { redirect_to @event, notice: 'event was successfully updated.' }
-         format.json { render :show, status: :ok, location: @event }
-       else
-         format.html { render :edit }
-         format.json { render json: @event.errors, status: :unprocessable_entity }
-       end
-     end
-   end
+    respond_to do |format|
+      format.html { redirect_to project, notice: 'Event was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
-   # DELETE /cities/1
-   # DELETE /cities/1.json
-   def destroy
-     authorize @event
-     project=@event.event.project
+  private
 
-     @event.destroy
-     respond_to do |format|
-       format.html { redirect_to project, notice: 'Event was successfully destroyed.' }
-       format.json { head :no_content }
-     end
-   end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event_occurrence
+    @event = EventOccurrence.find(params[:id])
+  end
 
-   private
-     # Use callbacks to share common setup or constraints between actions.
-     def set_event_occurrence
-       @event = EventOccurrence.find(params[:id])
-     end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event_occurrence).permit(:date, :event_id)
+  end
 
-     # Never trust parameters from the scary internet, only allow the white list through.
-     def event_params
-       params.require(:event_occurrence).permit(:date, :event_id)
-     end
-  
-  
+
 end
