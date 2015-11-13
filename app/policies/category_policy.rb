@@ -1,4 +1,4 @@
-class CategoryPolicy
+class CategoryPolicy< ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     attr_reader :user, :scope
     def initialize(user, scope)
@@ -14,7 +14,7 @@ class CategoryPolicy
       end
     end
   end
-  
+
   def show?
     return true
   end

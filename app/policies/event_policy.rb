@@ -1,4 +1,4 @@
-class EventPolicy
+class EventPolicy< ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     attr_reader :user, :scope
     def initialize(user, scope)

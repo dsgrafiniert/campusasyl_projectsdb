@@ -1,4 +1,4 @@
-class UserPolicy
+class UserPolicy< ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     attr_reader :user, :scope
     def initialize(user, scope)
