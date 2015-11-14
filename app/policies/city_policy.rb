@@ -7,7 +7,7 @@ class CityPolicy< ApplicationPolicy
     end
 
     def resolve
-      if @user.admin?
+      if @user != nil && @user.admin?
         @scope
       else
         @scope
