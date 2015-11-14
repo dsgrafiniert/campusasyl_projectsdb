@@ -15,7 +15,15 @@
         <%= render 'layouts/navigation_links' %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-
+		<% if I18n.locale.to_s != 'en' %>
+		  <li><%= link_to image_tag("country_flags/United-kingdom-flag.png", height: '20'), '/en/' + params[:controller]%></li>
+		<%end%>
+		<% if I18n.locale.to_s != 'de' %>
+		  <li><%= link_to image_tag("country_flags/Germany-flag.png", height: '20'), '/de/' + params[:controller]%></li>
+		<%end%>
+		<% if I18n.locale.to_s != 'ar' %>
+		  <li><%= link_to image_tag("country_flags/Syria-flag.png", height: '20'), '/ar/' + params[:controller]%></li>
+		<%end%>
 	<% if user_signed_in? %>
 	  <li><%= link_to t(:edit_account), edit_user_registration_path %></li>
 	  <li><%= link_to t(:sign_out), destroy_user_session_path, :method=>'delete' %></li>
