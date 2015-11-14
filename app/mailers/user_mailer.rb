@@ -12,5 +12,13 @@ class UserMailer < ApplicationMailer
       @url  = 'http://example.com/login'
       mail(to: @user.email, subject: 'Welcome to My Awesome Site')
   end
+  
+  def participation_request_email(admin, user, project)
+      @user = user
+      @admin = admin
+      @project = project
+      @url  = 'http://example.com/login'
+      mail(to: @admin.email, subject: 'Welcome to My Awesome Site')
+  end
     
 end
