@@ -1,0 +1,15 @@
+.row
+  .col-md-3
+    = image_tag @upload.file.url(:medium), style: "width: 100%;"
+
+  .col-md-9
+    = simple_form_for(@upload) do |f2|
+      = f2.error_notification
+
+      .form-inputs
+        = f2.input :name
+        = f2.input :description
+
+      .form-actions
+        = f2.button :submit, :class=>"btn btn-primary"
+        = link_to (t '.cancel'), project_path(@upload.project), :class=> "btn btn-default"

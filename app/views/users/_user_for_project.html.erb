@@ -1,8 +1,0 @@
-<td>
-  <%= link_to user.email, user %>
-</td>
-<td>
-  	<%=raw (user.skill_list & project.skill_list).map{|e| ('<span class="label label-default">'+e+'</span>')}.join(' ') %>
-
-</td>
-

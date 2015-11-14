@@ -1,0 +1,7 @@
+td
+  = link_to user.email, user
+td
+  - (user.skill_list & project.skill_list).each as |e|
+    span.label.label-default
+      = e
+      |&nbsp;

@@ -1,0 +1,11 @@
+= simple_form_for(@city, :html=> { :class=>"form-horizontal"}) do |f|
+  = f.error_notification
+  .form-group
+    = f.label :title, class: "col-md-2 control-label"
+    .col-md-10
+      = f.input :title, :label => false, class: "form-control col-md-10"
+    = f.label :users, class: "col-md-2 control-label"
+    .col-md-10
+      = f.association :users, :as => :check_boxes, :label => false, boolean_style: :inline, item_wrapper_tag: :div, item_wrapper_class: "col-md-3 col-md-offset-1 well"
+  .form-actions
+    = f.button :submit

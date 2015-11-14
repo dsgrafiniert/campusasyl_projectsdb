@@ -1,0 +1,119 @@
+h2
+  = @project.title
+.row
+  .col-md-3
+    - if (@project.city.participants.include?(current_user) && !@project.participants.include?(current_user))
+      p
+        = link_to (t '.participate_1'), participate_project_path(@project), :class=> 'btn btn-default'
+    - if @project.has_edit_permission?(current_user)
+      p
+        = link_to t(:find_participants), find_participants_project_path(@project), :class=> 'btn btn-default'
+    - if (@project.city.participants.include?(current_user))
+      h4
+        = t '.verantwortliche_1'
+
+      ul.list-group
+        - @project.users.each do |user|
+          - if user_signed_in? && @project.participants.include?(current_user)
+            a.list-group-item.clearfix href=user_url(user)
+
+            = t '.nbsp_1', :image_tag_user => (image_tag user.avatar.url(:thumb), :class => "pull-left"), :user_name => (user.name)
+          - else
+            li.list-group-item
+              = user.name
+
+  .col-md-9
+    p
+      = @project.description
+
+    - if @project.has_view_permission?(current_user)
+      - if @project.has_edit_permission?(current_user) && @project.participations.where(:status => 1).size > 0
+        table.table.table-striped
+          thead
+            tr
+              th[width="100"]
+              th
+                = t '.nutzer_1'
+              th[colspan="2"]
+
+          tbody
+            - @project.participations.where(:status => 1).each do |participation|
+              tr
+                td
+                  - if participation.participant.avatar.exists?(:thumb)
+                    = image_tag participation.participant.avatar.url(:thumb)
+                td
+                  = participation.participant.name
+                td
+                  = link_to (t '.approve'), approve_participant_path(@project, participation)
+                td
+                  = link_to (t '.decline'), decline_participant_path(@project, participation)
+        br
+        br
+      table.table.table-striped
+        thead
+          tr
+            th
+              = t '.termin'
+            th
+              = t '.benötigte'
+
+            - if @project.has_edit_permission?(current_user)
+              th[colspan="2"]
+        tbody
+          - @project.events.each do |ev|
+            - ev.remaining_event_occurrences.sort_by(&:urgency).reverse.each do |event|
+              tr
+                td
+                  = link_to l(event.date), event
+                td
+                  = t '.von', :event => (event.remaining_free_places), :ev_required => (ev.required_people)
+                - if @project.has_edit_permission?(current_user)
+                  td
+                    = link_to (raw("<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> ")+(t :edit)), edit_event_path(ev), :class => "btn btn-default btn-xs"
+                  td
+                    = link_to (raw("<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> ")+(t :destroy)), ev, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs"
+
+      br
+      - if @project.has_edit_permission?(current_user)
+        = link_to (t '.new_event_2'), new_event_path(project_id: @project.id)
+        br
+
+      table.table.table-striped
+        thead
+          tr
+            th[width="100"]
+            th
+              = t '.dateien'
+            - if @project.has_edit_permission?(current_user)
+              th[colspan="2"]
+        tbody
+          - @project.uploads.each do |upload|
+            tr
+              td
+                - if upload.file.exists?(:thumb)
+                  = link_to image_tag(upload.file.url(:thumb)), upload.file.url(:original, false)
+              td
+                = link_to upload.name, upload.file.url(:original, false)
+              - if @project.has_edit_permission?(current_user)
+                td
+                  = link_to (t :edit), edit_upload_path(upload)
+                td
+                  = link_to (t :destroy), upload, method: :delete, data: { confirm: 'Are you sure?' }
+
+      br
+      - if @project.has_edit_permission?(current_user)
+        = simple_form_for(Upload.new(project_id: @project.id), {url: "/uploads/upload", html: { multipart: true, class: "dropzone"}}) do |f|
+          = f.error_notification
+          = f.hidden_field :project_id
+          .form-inputs
+            .fallback
+              = f.file_field :file
+              br
+
+        br
+        br
+        = link_to (t '.edit_11'), edit_project_path(@project)
+
+        
+    = link_to (t '.back_11'), city_path(@project.city)

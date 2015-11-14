@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    h3
+      = t '.users_1'
+
+    table.table.table-striped
+      tbody
+        - @users.each do |user|
+          tr
+            = render user

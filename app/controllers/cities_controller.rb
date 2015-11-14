@@ -6,6 +6,7 @@ class CitiesController < ApplicationController
   # GET /cities.json
   def index
     @cities = policy_scope(City.all)
+
   end
 
   # GET /cities/1
@@ -52,7 +53,6 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1.json
   def update
     authorize @city, :update?
-
     respond_to do |format|
       if @city.update(city_params)
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
