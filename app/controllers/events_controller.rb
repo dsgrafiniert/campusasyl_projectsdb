@@ -1,40 +1,28 @@
 class EventsController < ApplicationController
-  
+
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
-  after_action :verify_authorized, only: [:edit, :update, :destroy]
-  
-  # GET /cities
-  # GET /cities.json
+
   def index
-    @events = Event.all
-    authorize Event
-    
+    @events = policy_scope(Event.all)
   end
 
-  # GET /cities/1
-  # GET /cities/1.json
   def show
-    
+    authorize @event, :show?
   end
 
-  # GET /cities/new
   def new
     @event = Event.new(:project => Project.find(params[:project_id]))
-    authorize Event
-    
+    authorize @event, :new?
   end
 
-  # GET /cities/1/edit
   def edit
-    authorize Event
-    
+    authorize @event, :edit?
   end
 
-  # POST /cities
-  # POST /cities.json
   def create
     @event = Event.new(event_params)
+    authorize @event, :create?
 
     respond_to do |format|
       if @event.save
@@ -47,11 +35,9 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cities/1
-  # PATCH/PUT /cities/1.json
   def update
-    authorize @event
-    
+    authorize @event, :update?
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event.project, notice: 'event was successfully updated.' }
@@ -63,12 +49,10 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /cities/1
-  # DELETE /cities/1.json
   def destroy
-    authorize @event
-    project=@event.project
-    
+    authorize @event, :destroy?
+    project = @event.project
+
     @event.destroy
     respond_to do |format|
       format.html { redirect_to project, notice: 'Event was successfully destroyed.' }
@@ -86,5 +70,4 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:date, :project_id, :required_people, schedule_attributes: Schedulable::ScheduleSupport.param_names)
     end
-  
 end

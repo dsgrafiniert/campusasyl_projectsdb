@@ -1,13 +1,18 @@
-class EventPolicy
-  attr_reader :current_user, :model
+class EventPolicy< ApplicationPolicy
+  class Scope < Struct.new(:user, :scope)
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
 
-  def initialize(current_user, model)
-    @current_user = current_user
-    @event = model
-  end
-
-  def index?
-    return true
+    def resolve
+      if @user.admin?
+        @scope
+      else
+        @scope
+      end
+    end
   end
 
   def new?
@@ -21,7 +26,7 @@ class EventPolicy
   def update?
     @current_user.admin?
   end
-  
+
   def edit?
     @current_user.admin?
   end

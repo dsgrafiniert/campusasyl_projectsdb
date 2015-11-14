@@ -1,19 +1,28 @@
-class ProjectPolicy
-  attr_reader :current_user, :model
+class ProjectPolicy< ApplicationPolicy
+  class Scope < Struct.new(:user, :scope)
+    attr_reader :user, :scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
 
-  def initialize(current_user, model)
-    @current_user = current_user
-    @project = model
+    def resolve
+      if @user.admin?
+        @scope
+      else
+        @scope
+      end
+    end
   end
 
-  def index?
+  def new?
     return true
   end
 
   def show?
     return true
   end
-  
+
   def create?
     @current_user.admin? || @project.city.users.include?(@current_user)
   end
@@ -21,7 +30,7 @@ class ProjectPolicy
   def update?
     @current_user.admin?
   end
-  
+
   def edit?
     @current_user.admin?
   end
@@ -29,5 +38,22 @@ class ProjectPolicy
   def destroy?
     @current_user.admin?
   end
+
+  def approve?
+    update?
+  end
+
+  def participate?
+    show?
+  end
+
+  def find_participants?
+    true
+  end
+
+  def decline?
+    create?
+  end
+
 
 end

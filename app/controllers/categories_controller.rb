@@ -1,39 +1,30 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
-   after_action :verify_authorized, only: [:edit, :update, :destroy]
-  # GET /categories
-  # GET /categories.json
+
   def index
-    @categories = Category.all
+    @categories = policy_scope(Category.all)
   end
 
-  # GET /categories/1
-  # GET /categories/1.json
   def show
+    authorize @category, :show?
     @city = City.find(params[:city_id])
     @categories = Category.where(:category => nil)
     @projects = Project.where(:category => @category, :city => @city)
   end
 
-  # GET /categories/new
   def new
     @category = Category.new
-    authorize Category
-    
+    authorize @category, :new?
   end
 
-  # GET /categories/1/edit
   def edit
-    authorize Category
-    
+    authorize @category, :edit?
   end
 
-  # POST /categories
-  # POST /categories.json
   def create
     @category = Category.new(category_params)
-    authorize Category
+    authorize @category, :create?
 
     respond_to do |format|
       if @category.save
@@ -46,11 +37,9 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
   def update
-    authorize @category
-    
+    authorize @category, :update?
+
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
@@ -62,11 +51,9 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.json
   def destroy
-    authorize Category
-    
+    authorize @category, :destroy?
+
     @category.destroy
     respond_to do |format|
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }

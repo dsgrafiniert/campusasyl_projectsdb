@@ -2,38 +2,28 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :participate, :approve, :decline, :find_participants]
   before_action :authenticate_user!, only: [:participate]
 
-  
-  # GET /projects
-  # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = policy_scope(Project.all)
     @cities = City.all
-    @categories = Category.where(:category => nil)
+    @categories = Category.where(category: nil)
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
   def show
-    authorize @project
-    
+    authorize @project, :show?
   end
 
-  # GET /projects/new
   def new
     @project = Project.new(:city => City.find(params[:city_id]))
+    authorize @project, :new?
   end
 
-  # GET /projects/1/edit
   def edit
-    authorize @project
-    
+    authorize @project, :edit?
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(project_params)
-    authorize @project
+    authorize @project, :create?
 
     respond_to do |format|
       if @project.save
@@ -46,9 +36,9 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
+    authorize @project, :update?
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -60,55 +50,64 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
+    authorize @project, :destroy?
+
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
-  
+
   def participate
-      @participation = Participation.where(:project => @project, :user => current_user).first_or_create
-      if (@project.is_private)
-        @participation.status=:applied
+    authorize @project, :participate?
+
+    @participation = Participation.where(:project => @project, :participant => current_user).first_or_create
+
+    if @project.is_private
+      @participation.status=:applied
+    else
+      @participation.status=:approved
+    end
+
+    respond_to do |format|
+      if @participation.save
+        format.html { redirect_to @project, notice: 'Successfully applied.' }
+        format.json { render :show, status: :created, location: @project }
       else
-        @participation.status=:approved
+        format.html { render :new }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
-       respond_to do |format|
-          if @participation.save
-            format.html { redirect_to @project, notice: 'Successfully applied.' }
-            format.json { render :show, status: :created, location: @project }
-          else
-            format.html { render :new }
-            format.json { render json: @project.errors, status: :unprocessable_entity }
-          end
-        end
-    
+    end
   end
-  
+
   def find_participants
+    authorize @project, :find_participants?
+
     @users = CityParticipation.where(:city => @project.city).map{|e| e.participant}.flatten
     @users.sort{|a, b| b.common_tags(@project) <=> a.common_tags(@project)}
   end
-  
+
   def approve
+    authorize @project, :approve?
+
     participation = Participation.find(params[:participant_id])
+
     respond_to do |format|
-    
-    if participation.update(:status => :approved)
-      format.html { redirect_to @project, notice: 'Participant was successfully approved.' }
-      format.json { render :show, status: :ok, location: @project }
-    else
-      format.html { render :edit }
-      format.json { render json: @project.errors, status: :unprocessable_entity }
+      if participation.update(:status => :approved)
+        format.html { redirect_to @project, notice: 'Participant was successfully approved.' }
+        format.json { render :show, status: :ok, location: @project }
+      else
+        format.html { render :edit }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
     end
   end
-  end
-  
+
   def decline
+    authorize @project, :decline?
+
     participation = Participation.find(params[:participant_id])
     participation.destroy
     respond_to do |format|
@@ -116,7 +115,7 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
