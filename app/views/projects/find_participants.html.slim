@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    h3
+      = t '.users'
+
+    table.table.table-striped
+      tbody
+        - @users.each do |user|
+          tr
+            = render partial:"users/user_for_project", locals: {user: user, project: @project}

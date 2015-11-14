@@ -1,0 +1,23 @@
+p#notice
+  = notice
+h1
+  = t '.listing'
+table
+  thead
+    tr
+      th
+        = t '.title'
+      th[colspan="3"]
+  tbody
+    - @categories.each do |category|
+      tr
+        td
+          = category.title
+        td
+          = link_to (t '.show_1'), category
+        td
+          = link_to (t '.edit'), edit_category_path(category)
+        td
+          = link_to (t '.destroy'), category, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to (t '.new_category'), new_category_path

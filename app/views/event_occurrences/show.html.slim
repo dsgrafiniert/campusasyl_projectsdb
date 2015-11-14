@@ -1,0 +1,44 @@
+h2
+  = @event.event.project.title
+h3
+  = l @event.date
+br
+
+.row
+  .col-md-3
+    - if user_signed_in?
+      - if !@event.users.include?(current_user)
+        = link_to (t :teilnehmen), attend_event_occurrence_path(@event), :class=>"btn btn-default"
+    - else
+      = link_to (t :teilnehmen), attend_event_occurrence_path(@event), :class=>"btn btn-default"
+
+  .col-md-9
+    table.table.table-striped
+      thead
+        tr
+          th
+            = t :title
+          th
+            = t :category
+          th
+            = t :urgent
+
+          - if user_signed_in?
+            - if current_user.try(:admin?)
+              th[colspan="2"]
+
+      tbody
+        - @event.users.each do |user|
+          - if Attend.where(:event_occurrence_id => @event.id, :user_id => user.id).pluck(:status).first == 1
+            tr.danger
+          - else
+            tr
+
+          td
+            = user.name
+          td
+          td
+          - if user_signed_in?
+            - if current_user.try(:admin?)
+              td
+              td

@@ -1,0 +1,69 @@
+= simple_form_for(@project) do |f|
+  = f.error_notification
+  .form-group
+    = f.label :title, class: "col-sm-2 control-label"
+
+    .col-sm-10
+      = f.input :title, :label => false, class: "form-control col-md-10"
+    = f.label :description, class: "col-sm-2 control-label"
+
+    .col-sm-10
+      = f.input :description, :label => false, class: "form-control col-md-10"
+    = f.label :city, class: "col-sm-2 control-label"
+
+    .col-sm-10
+      = f.association :city, :label => false, class: "form-control col-md-10"
+    = f.label :category, class: "col-sm-2 control-label"
+
+    .col-sm-10
+      = f.association :category, :label => false, class: "form-control col-md-10"
+
+    .form-group
+      = f.label :language_skills, :class => "col-sm-2 control-label"
+
+      .col-sm-10
+        = f.input_field :language_skill_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "language_skills").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_language_skill
+        = f.text_field "new_language_skill", class: "form-control", 'data-role': "tagsinput"
+
+    .form-group
+      = f.label :studies , :class => "col-sm-2 control-label"
+
+      .col-sm-10
+        = f.input_field :study_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "study").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_study
+        = f.text_field "new_study", class: "form-control", 'data-role': "tagsinput"
+
+    .form-group
+      = f.label :working_experience, :class => "col-sm-2 control-label"
+
+      .col-sm-10
+        = f.input_field :working_experience_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "working_experience").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_working_experience
+        = f.text_field "new_working_experience", class: "form-control", 'data-role': "tagsinput"
+
+    .form-group
+      = f.label :skills, :class => "col-sm-2 control-label"
+
+      .col-sm-10
+        = f.input_field :skill_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "skills").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.label :new_skill
+        = f.text_field "new_skill", class: "form-control", 'data-role': "tagsinput"
+
+    = f.label :urgent, class: "col-sm-2 control-label"
+
+    .col-sm-10
+      = f.input :urgent, :label => false, class: "form-control col-md-10"
+
+    = f.label :is_private, class: "col-sm-2 control-label"
+
+    .col-sm-10
+      = f.input :is_private, :label => false, class: "form-control col-md-10"
+
+    = f.label :users, class: "col-md-2 control-label"
+
+    .col-md-10
+      = f.association :users, :as => :check_boxes, :label => false, boolean_style: :inline, item_wrapper_tag: :div, item_wrapper_class: "col-md-3 col-md-offset-1 well"
+
+  .form-actions
+    = f.button :submit

@@ -1,9 +1,0 @@
-<h3><%= t '.welcome' %></h3>
-
-<p><%= t '.entered', :link_to => (link_to (t '.categories'), categories_path), :category_count => (Category.count) %></p>
-
-<p><%= t '.entered_1', :link_to_cities => (link_to (t '.cities'), cities_path), :city_count => (City.count) %></p>
-
-<p><%= t '.entered_2', :link_to => (link_to (t '.projects'), projects_path), :project_count => (Project.count) %></p>
-
-<p><%= t '.registered', :link_to_users => (link_to (t '.users_2'), users_path), :user_count => (User.count) %></p>

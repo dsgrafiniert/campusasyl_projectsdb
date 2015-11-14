@@ -1,0 +1,28 @@
+p#notice
+  = notice
+h1
+  = t '.herzlich'
+
+table.table.table-striped
+  thead
+    tr
+      th
+        = t '.in_welcher'
+      - if user_signed_in?
+        - if current_user.try(:admin?)
+          th
+  tbody
+    - @cities.sort.each do |city|
+      tr
+        td
+          = link_to city.title, city
+        - if user_signed_in?
+          - if current_user.try(:admin?)
+            td
+              = link_to (raw("<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> ")+(t '.edit_3')), edit_city_path(city), :class => "btn btn-default btn-xs"
+              = link_to (raw("<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span> ")+(t '.destroy_2')), city, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default btn-xs"
+
+br
+- if user_signed_in?
+  - if current_user.try(:admin?)
+    = link_to (t '.new_city'), new_city_path, :class=> "btn btn-default"
