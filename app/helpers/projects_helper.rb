@@ -14,7 +14,10 @@ module ProjectsHelper
   
   def find_participants_project_path(project)
     "/projects/#{project.id}/find_participants"
-    
+  end
+  
+  def project_invite_user_path(project, user)
+    "/projects/#{project.id}/invite/#{user.id}"
   end
   
 end

@@ -67,6 +67,8 @@ class ProjectsController < ApplicationController
 
     if @project.is_private
       @participation.status=:applied
+      UserMailer.participation_request_email(current_user, @participant, @project)
+      
     else
       @participation.status=:approved
     end
@@ -103,6 +105,13 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def invite
+    authorize @project, :invite?
+    @participant = User.find(params[:participant_id])
+    UserMailer.invitation_email(@participant, @project)
+    redirect_to find_participants_project_path @project, notice: t('.participant_invited')
   end
 
   def decline

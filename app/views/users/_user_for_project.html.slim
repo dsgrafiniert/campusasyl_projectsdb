@@ -1,7 +1,9 @@
 td
   = link_to user.email, user
 td
-  - (user.skill_list & project.skill_list).each as |e|
-    span.label.label-default
-      = e
-      |&nbsp;
+  - (user.skill_list & project.skill_list).each do |e|
+		span.label.label-default
+			= e
+		|&nbsp;
+td
+	= link_to t('.invite'), project_invite_user_path(project, user)
