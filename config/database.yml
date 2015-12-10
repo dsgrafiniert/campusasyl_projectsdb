@@ -20,6 +20,11 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-production:
-  <<: *default
-  database: db/production.sqlite3
+  production:
+    adapter: mysql2
+    pool: 5
+    timeout: 5000
+    username: root
+    password: <%= ENV['DB_ENV_MYSQL_ROOT_PASSWORD'] %>
+    host: 'db'
+    database: beer_production

@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   
     get 'cities/:id/invite/:invitationHash', to: 'cities#invite'
     get 'event_occurrences/:id/attend', to: 'event_occurrences#attend'
+    get 'event_occurrences/:id/decline', to: 'event_occurrences#decline'
+    get 'my/event_occurrences', to: 'event_occurrences#mine'
+    
     resources :users
   end
 end

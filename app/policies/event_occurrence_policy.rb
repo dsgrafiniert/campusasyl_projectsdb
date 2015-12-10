@@ -18,13 +18,21 @@ class EventOccurrencePolicy< ApplicationPolicy
   def new?
     @current_user.admin?
   end
+  
+  def mine?
+    return true
+  end
+  
+  def decline?
+    return true
+  end
 
   def show?
     return true
   end
 
   def attend?
-    return (!(@event.event.project.is_private) || @event.event.project.participants.include?(@current_user))
+    return (!(@record.event.project.is_private) || @record.event.project.participants.include?(@current_user))
   end
 
   def update?

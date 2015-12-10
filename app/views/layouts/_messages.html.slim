@@ -3,10 +3,13 @@
   - if msg.is_a?(String)
     -if name.to_s == 'notice' ? 'success' : 'danger'
       .alert.alert-success
+        = content_tag :div, :id => "flash_#{name}" do
+          = msg
+          button.close[type="button" data-dismiss="alert" aria-hidden="true"] x
     -else
       .alert.alert-danger
+        = content_tag :div, :id => "flash_#{name}" do
+          = msg
+          button.close[type="button" data-dismiss="alert" aria-hidden="true"] ×
 
-    button.close[type="button" data-dismiss="alert" aria-hidden="true"]
-      | ×
-
-    = content_tag :div, msg, :id => "flash_#{name}"
+    

@@ -3,6 +3,8 @@ li
   = link_to t(:cities_overview), cities_path
 
 - if user_signed_in?
+  li
+    = link_to t(:my_events), my_events_path
   - if current_user.try(:admin?)
     li
       = link_to t(:users_overview), users_path

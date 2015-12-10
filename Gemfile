@@ -25,6 +25,7 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'pundit'
 gem 'simple_form'
+gem 'unicorn'
 
 
 group :development, :test do

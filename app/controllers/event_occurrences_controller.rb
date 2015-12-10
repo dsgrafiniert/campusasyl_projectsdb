@@ -1,6 +1,6 @@
 class EventOccurrencesController < ApplicationController
-  before_action :set_event_occurrence, only: [:show, :edit, :update, :destroy, :attend]
-  before_action :authenticate_user!, only: [:edit, :update, :destroy, :attend]
+  before_action :set_event_occurrence, :only => [:show, :edit, :update, :destroy, :attend, :decline]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :attend, :mine, :decline]
 
   def index
     @events = policy_scope(EventOccurrence.all)
@@ -12,6 +12,23 @@ class EventOccurrencesController < ApplicationController
 
   def edit
     authorize @event, :edit?
+  end
+  
+  def mine
+    authorize EventOccurrence, :mine?
+    @events = Attend.where(:user => current_user).collect{ |e| e.event_occurrence}
+    @events.delete_if { |e| e.date.past? }
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :index, status: :error}
+    end
+  end
+  
+  def decline
+    authorize @event, :decline?
+    @attend = Attend.where(:user => current_user, :event_occurrence => @event)
+    @attend.first.destroy unless @attend.first == nil
+    redirect_to action: "mine"
   end
 
   def attend
@@ -27,17 +44,17 @@ class EventOccurrencesController < ApplicationController
 
       respond_to do |format|
         if @attend.save
-          format.html { redirect_to @event, notice: 'You have been added.' }
+          format.html { redirect_to @event.event.project, notice: t('.You have been added') }
           format.json { render :show, status: :created, location: @event }
         else
-          format.html { render :new }
+          format.html { redirect_to @event.event.project, notice: t('.Something went wrong') }
           format.json { render json: @attend.errors, status: :unprocessable_entity }
         end
       end
 
     else
       respond_to do |format|
-        format.html { redirect_to @event, notice: 'This event is already full. Thanks for your help, do you have time at any other date?.' }
+        format.html { redirect_to @event.event.project, notice: t('.This event is already full.') }
         format.json { render :show, status: :error, location: @event }
       end
     end

@@ -1,0 +1,11 @@
+h1
+  = t ".my_events"
+- iterator = 0
+- @events.sort_by(&:date).each do |event|
+    .panel.panel-default
+      .panel-body
+        = l(event.date)+": "+event.event.project.title
+        = link_to raw('<span aria-hidden="true">&times;</span>'), decline_event_occurrence_path(event), class: "close"
+         
+        
+      

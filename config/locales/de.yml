@@ -23,14 +23,18 @@ de:
       edit_1: Bearbeiten
       edit_2: Bearbeiten
       kategorien: Kategorien
-      new_project: New project
+      new_project: Neues Projekt anlegen
       title_1: Title
       unsere: Unsere Projekte in %{city_title}
   category: Kategorie
   cities_overview: Städte
   projects_overview: Projekte
   users_overview: Nutzer
-  
+  my_events: Meine Termine
+  event_occurrences:
+    index:
+      my_events: Meine Termine
+      
   cities:
     index:
       new_city: Neue Stadt anlegen
@@ -40,18 +44,19 @@ de:
       herzlich: Herzlich Willkommen
     show:
       unsere_1: Unsere Projekte in %{city_title}
-      alle: Alle
+      alle_1: Alle
       back_2: Zurück
       category_1: Kategorie
       destroy_1: Löschen
       edit_1: Bearbeiten
       edit_2: Bearbeiten
-      kategorien: Kategorien
-      new_project: New project
+      edit_5: Bearbeiten
+      
+      kategorien_1: Kategorien
+      new_project_1: Neues Projekt anlegen
       title_1: Titel
       title_2: Titel
       back_5: Zurück
-      responsible_user: '%{image_tag_user}&nbsp;%{user_name}'
   
   
   date:
@@ -197,7 +202,9 @@ de:
     show:
       back_8: Zurück
       edit_7: Bearbeiten
-  find_participants: Helfer für dieses Projekt finden
+  find_participants: |
+    Helfer für dieses
+    Projekt finden
   layouts:
     application:
       sie_sind_hier: 'Sie sind hier:'
@@ -218,7 +225,7 @@ de:
       destroy_5: Löschen
       edit_8: Bearbeiten
       listing_1: Listing
-      new_project_2: New project
+      new_project_2: Neues Projekt anlegen
       benötigt: Required
       show_6: Anzeigen
       time: Time
@@ -226,7 +233,7 @@ de:
       urgent_1: Urgent
     new:
       back_10: Zurück
-      new_project_3: New project
+      new_project_3: Neues Projekt anlegen
     show:
       approve: Approve
       back_11: Zurück
@@ -238,8 +245,8 @@ de:
       nutzer_1: user
       participate_1: Teilnehmen
       termin: Termin
-      verantwortliche_1: Responsible
-      von: '%{event} von %{ev_required}'
+      verantwortliche: Verantwortliche Nutzer
+      von: 'noch %{event} von insgesamt %{ev_required} Personen gesucht'
   sign_in: Anmelden
   sign_out: Abmelden
   sign_up: Registrieren

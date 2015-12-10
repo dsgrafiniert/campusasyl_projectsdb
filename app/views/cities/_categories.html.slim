@@ -1,10 +1,12 @@
-ul.list-group
-  - categories.each do |cat|
-    li.list-group-item
-      - if cat.children.any?
-        h5
-          =link_to cat.title, category_path(cat, :city_id => @city.id)
-        = render :partial => 'categories', :locals => {:categories => cat.children}
+- categories.each do |cat|
+  li
+    =link_to category_path(cat, :city_id => @city.id) do
+      - depth.times
+        | &nbsp;
 
-      - else
-        =link_to cat.title, category_path(cat, :city_id => @city.id)
+      = cat.title
+		
+  - if cat.children.any?
+	  = render :partial => 'categories', :locals => {:categories => cat.children, :depth => (depth+2)}
+
+    

@@ -1,11 +1,11 @@
 module CitiesHelper
   
   def participate_city_path(city)
-    "/cities/#{city.id}/participate"
+    "/#{I18n.locale}/cities/#{city.id}/participate"
   end
   
   def invite_city_path(city)
-    "/cities/#{city.id}/invite/#{city.invitationHash}"
+    "/#{I18n.locale}/cities/#{city.id}/invite/#{city.invitationHash}"
   end
   
 end
