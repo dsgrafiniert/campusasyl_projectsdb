@@ -8,6 +8,8 @@ RUN apt-get update -q
 RUN apt-get install -qy nginx
 RUN apt-get install -qy curl
 RUN apt-get install -qy nodejs
+RUN apt-get install -qy libtool
+RUN apt-get install -qy libgmp-dev
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Install rvm, ruby, bundler
@@ -18,8 +20,8 @@ RUN /bin/bash -l -c "rvm install 2.2.2"
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 
 # Add configuration files in repository to filesystem
-ADD config/container/nginx-sites.conf /etc/nginx/sites-enabled/default
-ADD config/container/start-server.sh /usr/bin/start-server
+ADD ./config/container/nginx-sites.conf /etc/nginx/sites-enabled/default
+ADD ./config/container/start-server.sh /usr/bin/start-server
 RUN chmod +x /usr/bin/start-server
 
 # Add rails project to project directory
@@ -30,7 +32,7 @@ WORKDIR /rails
 
 # bundle install
 RUN /bin/bash -l -c "bundle install"
-
+RUN /bin/bash -l -c "bin/rake db:migrate RAILS_ENV=development"
 # Publish port 80
 EXPOSE 80
 
