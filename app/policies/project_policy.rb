@@ -30,6 +30,10 @@ class ProjectPolicy< ApplicationPolicy
   def update?
     @current_user.admin?
   end
+  
+  def invite?
+    true
+  end
 
   def edit?
     @current_user.admin?

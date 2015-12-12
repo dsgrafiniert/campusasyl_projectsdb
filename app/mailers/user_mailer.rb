@@ -1,10 +1,11 @@
 class UserMailer < ApplicationMailer
   
-  def invitation_email(user, project)
+  def invitation_email(user, project, admin, url)
       @user = user
       @project = project
-      @url  = 'http://example.com/login'
-      mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+      @admin = admin
+      @url  = 'http://projekte.campus-asyl.de'+url
+      mail(to: @user.email, subject: 'Einladung zur Unterstützung')
   end
   
   def reminder_email(user, event_occurrence)

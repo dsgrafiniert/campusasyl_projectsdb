@@ -1,9 +1,11 @@
-Hello, <%= @user.name %>
+Hallo, <%= @user.name %>
 ===============================================
  
-You have been invited to example.com,
-your username is: <%= @user.login %>.
- 
-To login to the site, just follow this link: <%= @url %>.
- 
-Thanks for joining and have a great day!
+<%= @admin.name %> hat dich eingeladen, beim Projekt "<%= @project.title %>" zu helfen.
+
+Es wäre toll, wenn du uns unterstützt.
+Falls ja, gib uns einfach kurz über diesen Link Bescheid:
+<%=@url %>
+
+Viele Grüße
+dein CAMPUS-Asyl Team

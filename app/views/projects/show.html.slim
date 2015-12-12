@@ -31,6 +31,46 @@ h2
 								  = link_to user.name, user_url(user)
             - else
               = user.name
+			
+			h4
+			  = t '.files'
+			- if @project.uploads.size > 0
+			  table.table.table-striped
+     	    thead
+            tr
+              th[width="100"]
+              th
+                = t '.files'
+              - if @project.has_edit_permission?(current_user)
+                th[colspan="2"]
+          tbody
+            - @project.uploads.each do |upload|
+              tr
+                td
+                  - if upload.file.exists?(:thumb)
+                    = link_to image_tag(upload.file.url(:thumb)), upload.file.url(:original, false)
+                td
+                    = link_to upload.name, upload.file.url(:original, false)
+                - if @project.has_edit_permission?(current_user)
+                  td
+                    = link_to (t :edit), edit_upload_path(upload)
+                  td
+                    = link_to (t :destroy), upload, method: :delete, data: { confirm: 'Are you sure?' }
+
+      br
+      - if @project.has_edit_permission?(current_user)
+        = simple_form_for(Upload.new(project_id: @project.id), {url: "/uploads/upload", html: { multipart: true, class: "dropzone"}}) do |f|
+          = f.error_notification
+          = f.hidden_field :project_id
+          .form-inputs
+          .fallback
+             = f.file_field :file
+             br
+
+      br
+      br
+      = link_to (t '.edit_11'), edit_project_path(@project), :class=> "btn btn-default"
+
           
 
   .col-md-9
@@ -69,6 +109,7 @@ h2
               - if user_signed_in?
                 - if !event.users.include?(current_user)
                   = link_to (l(event.date)), attend_event_occurrence_path(event), data: { confirm: 'Teilnahme für diesen Termin anbieten?' }
+                  = link_to (t(".help")), attend_event_occurrence_path(event), data: { confirm: 'Teilnahme für diesen Termin anbieten?' }, :class => "btn btn-default btn-primary btn-xs pull-right"
                 - else
                   = l(event.date)
               - else
@@ -88,41 +129,6 @@ h2
         br
 
       br
-      table.table.table-striped
-        thead
-          tr
-            th[width="100"]
-            th
-              = t '.dateien'
-            - if @project.has_edit_permission?(current_user)
-              th[colspan="2"]
-        tbody
-          - @project.uploads.each do |upload|
-            tr
-              td
-                - if upload.file.exists?(:thumb)
-                  = link_to image_tag(upload.file.url(:thumb)), upload.file.url(:original, false)
-              td
-                = link_to upload.name, upload.file.url(:original, false)
-              - if @project.has_edit_permission?(current_user)
-                td
-                  = link_to (t :edit), edit_upload_path(upload)
-                td
-                  = link_to (t :destroy), upload, method: :delete, data: { confirm: 'Are you sure?' }
-
-      br
-      - if @project.has_edit_permission?(current_user)
-        = simple_form_for(Upload.new(project_id: @project.id), {url: "/uploads/upload", html: { multipart: true, class: "dropzone"}}) do |f|
-          = f.error_notification
-          = f.hidden_field :project_id
-          .form-inputs
-            .fallback
-              = f.file_field :file
-              br
-
-        br
-        br
-        = link_to (t '.edit_11'), edit_project_path(@project), :class=> "btn btn-default"
-
+      
         
     = link_to (t '.back_11'), city_path(@project.city), :class=> "btn btn-default"

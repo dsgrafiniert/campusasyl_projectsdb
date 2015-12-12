@@ -217,7 +217,7 @@ de:
       editing_1: Bearbeitening
       show_5: Anzeigen
     find_participants:
-      users: Users
+      users: Nutzer zu diesem Projekt einladen
     index:
       category_3: Kategorie
       city: Stadt
@@ -231,6 +231,8 @@ de:
       time: Time
       title_4: Title
       urgent_1: Urgent
+    invite:
+      participant_invited: Teilnehmer wurde eingeladen
     new:
       back_10: Zurück
       new_project_3: Neues Projekt anlegen
@@ -240,6 +242,7 @@ de:
       benötigte: benötigt
       dateien: files
       decline: ablehnen
+      help: Mithelfen
       edit_11: Bearbeiten
       new_event_2: New event
       nutzer_1: user
@@ -280,6 +283,8 @@ de:
       zum_facebook: Zum facebook
     user:
       delete_user: Delete user
+    user_for_project:
+      invite: "Einladen"
   visitors:
     index:
       categories: Categories

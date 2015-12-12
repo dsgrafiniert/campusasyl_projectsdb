@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :participate, :approve, :decline, :find_participants]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :participate, :approve, :decline, :find_participants, :invite, :accept_invite]
   before_action :authenticate_user!, only: [:participate]
 
   def index
@@ -67,11 +67,28 @@ class ProjectsController < ApplicationController
 
     if @project.is_private
       @participation.status=:applied
-      UserMailer.participation_request_email(current_user, @participant, @project)
-      
+      UserMailer.participation_request_email(current_user, @participant, @project).deliver
     else
       @participation.status=:approved
     end
+
+    respond_to do |format|
+      if @participation.save
+        format.html { redirect_to @project, notice: 'Successfully applied.' }
+        format.json { render :show, status: :created, location: @project }
+      else
+        format.html { render :new }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def accept_invite
+    authorize @project, :participate?
+
+    @participation = Participation.where(:project => @project, :participant => User.find(params[:participant_id])).first_or_create
+
+    @participation.status=:approved
 
     respond_to do |format|
       if @participation.save
@@ -88,6 +105,7 @@ class ProjectsController < ApplicationController
     authorize @project, :find_participants?
 
     @users = CityParticipation.where(:city => @project.city).map{|e| e.participant}.flatten
+    @users.delete_if{|user| user.projects.exists?(@project) || user == current_user}
     @users.sort{|a, b| b.common_tags(@project) <=> a.common_tags(@project)}
   end
 
@@ -110,9 +128,23 @@ class ProjectsController < ApplicationController
   def invite
     authorize @project, :invite?
     @participant = User.find(params[:participant_id])
-    UserMailer.invitation_email(@participant, @project)
-    redirect_to find_participants_project_path @project, notice: t('.participant_invited')
+    
+    @participation = Participation.where(:project => @project, :participant => @participant).first_or_create
+    @participation.generate_token
+    @participation.status=:invited
+    
+    
+    UserMailer.invitation_email(@participant, @project, current_user, "/#{I18n.locale}/projects/#{@project.id}/#{@participant.id}/accept/#{@participation.invitationHash}").deliver
+    respond_to do |format|
+      if @participation.save
+        format.html { redirect_to "/#{I18n.locale}/projects/#{@project.id}/find_participants", notice: t('.participant_invited') }
+      else
+        format.html { redirect_to "/#{I18n.locale}/projects/#{@project.id}/find_participants", error: t('.something_went_wrong') }
+      end
+    end
   end
+  
+  
 
   def decline
     authorize @project, :decline?

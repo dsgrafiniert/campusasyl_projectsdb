@@ -4,6 +4,10 @@ module ProjectsHelper
     "/#{I18n.locale}/projects/#{project.id}/participate"
   end
   
+  def project_accept_path(project, user)
+    "/#{I18n.locale}/projects/#{project.id}/#{user.id}/accept"
+  end
+  
   def approve_participant_path(project, participant)
     "/#{I18n.locale}/projects/#{project.id}/approve/#{participant.id}"
   end

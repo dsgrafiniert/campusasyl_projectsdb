@@ -1,30 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Welcome to example.com, <%= @user.name %></h1>
-    <p>
-      You have successfully signed up to example.com,
-      your username is: <%= @user.login %>.<br>
-    </p>
-    <p>
-      To login to the site, just follow this link: <%= @url %>.
-    </p>
-    <p>Thanks for joining and have a great day!</p>
-  </body>
-</html>
-
 <table>
 	<tr>
 		<td>
-			<h3>Hi, Elijah Baily</h3>
-			<p class="lead">Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et pharetra vitae.</p>
-			<p>Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et pharetra vitae. consequat vel lacus. Sed iaculis pulvinar ligula, ornare fringilla ante viverra et. In hac habitasse platea dictumst. Donec vel orci mi, eu congue justo. Integer eget odio est, eget malesuada lorem. Aenean sed tellus dui, vitae viverra risus. Nullam massa sapien, pulvinar eleifend fringilla id, convallis eget nisi. Mauris a sagittis dui. Pellentesque non lacinia mi. Fusce sit amet libero sit amet erat venenatis sollicitudin vitae vel eros. Cras nunc sapien, interdum sit amet porttitor ut, congue quis urna.</p>
+			<h3>Hallo <%= @user.name%>,</h3>
+			<p class="lead"><%= @admin.name %> hat dich eingeladen, beim Projekt "<%= @project.title %>" zu helfen.</p>
+			
 			<!-- Callout Panel -->
 			<p class="callout">
-				Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et pharetra vitae. <a href="#">Click it! &raquo;</a>
+				Es wäre toll, wenn du uns unterstützt.
+				Falls ja, gib uns einfach kurz über diesen Link Bescheid: <a href="<%= @url %>"><%= @url %></a>
 			</p><!-- /Callout Panel -->					
 									
 			<!-- social & contact -->
