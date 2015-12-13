@@ -32,7 +32,6 @@ WORKDIR /rails
 
 # bundle install
 RUN /bin/bash -l -c "bundle install"
-RUN /bin/bash -l -c "bin/rake db:migrate RAILS_ENV=production"
 # Publish port 80
 EXPOSE 80
 
