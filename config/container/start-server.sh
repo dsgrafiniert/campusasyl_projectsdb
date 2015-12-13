@@ -1,5 +1,5 @@
 #!/bin/bash
 cd /rails
 source /etc/profile.d/rvm.sh
-bundle exec unicorn -D -p 8080
+bundle exec unicorn -E production -D -p 8080
 nginx

@@ -20,11 +20,11 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-  production:
+production:
     adapter: mysql2
     pool: 5
     timeout: 5000
     username: root
-    password: <%= ENV['DB_ENV_MYSQL_ROOT_PASSWORD'] %>
+    password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
     host: 'db'
-    database: beer_production
+    database: <%= ENV['MYSQL_DATABASE'] %>
