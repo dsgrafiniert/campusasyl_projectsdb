@@ -17,7 +17,7 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A170311380
 RUN curl -sSL https://get.rvm.io | bash -s stable
 RUN /bin/bash -l -c "rvm requirements"
 RUN /bin/bash -l -c "rvm install 2.2.2"
-RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc --version '1.10.0'"
 
 # Add configuration files in repository to filesystem
 ADD ./config/container/nginx-sites.conf /etc/nginx/sites-enabled/default
