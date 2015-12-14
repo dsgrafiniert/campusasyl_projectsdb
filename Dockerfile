@@ -11,6 +11,7 @@ RUN apt-get install -qy nodejs
 RUN apt-get install -qy libtool
 RUN apt-get install -qy libgmp-dev
 RUN apt-get install -qy libmysqlclient-dev
+RUN apt-get install -qy imagemagick
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Install rvm, ruby, bundler
