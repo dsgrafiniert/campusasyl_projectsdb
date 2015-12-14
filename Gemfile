@@ -7,7 +7,6 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem "slim-rails"
-gem 'mysql2'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -47,4 +46,8 @@ group :development do
   gem 'capistrano-rvm', '~> 0.1.1'
   gem 'quiet_assets'
   gem 'rails_layout'
+end
+
+group :production do
+  gem 'mysql2', '~> 0.3.20'
 end
