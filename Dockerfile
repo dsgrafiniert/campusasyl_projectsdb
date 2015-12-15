@@ -34,6 +34,7 @@ WORKDIR /rails
 
 # bundle install
 RUN /bin/bash -l -c "bundle install"
+RUN /bin/bash -l -c "whenever -w"
 # Publish port 80
 EXPOSE 80
 
