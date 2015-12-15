@@ -24,7 +24,21 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     authorize @project, :create?
+	if params[:project].has_key?(:new_skill) && params[:project][:new_skill] != nil && params[:project][:new_skill] != ""
+      params[:project][:skill_list] << params[:project][:new_skill]
+    end
 
+    if params[:project].has_key?(:new_language_skill) && params[:project][:new_language_skill] != nil && params[:project][:new_language_skill] != ""
+      params[:project][:language_skill_list] << params[:project][:new_language_skill]
+    end
+
+    if params[:project].has_key?(:new_working_experience) && params[:project][:new_working_experience] != nil && params[:project][:new_working_experience] != ""
+      params[:project][:working_experience_list] << params[:project][:new_working_experience]
+    end
+
+    if params[:project].has_key?(:new_study) && params[:project][:new_study] != nil && params[:project][:new_study] != ""
+      params[:project][:study_list] << params[:project][:new_study]
+    end
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -38,7 +52,21 @@ class ProjectsController < ApplicationController
 
   def update
     authorize @project, :update?
+	if params[:project].has_key?(:new_skill) && params[:project][:new_skill] != nil && params[:project][:new_skill] != ""
+      params[:project][:skill_list] << params[:project][:new_skill]
+    end
 
+    if params[:project].has_key?(:new_language_skill) && params[:project][:new_language_skill] != nil && params[:project][:new_language_skill] != ""
+      params[:project][:language_skill_list] << params[:project][:new_language_skill]
+    end
+
+    if params[:project].has_key?(:new_working_experience) && params[:project][:new_working_experience] != nil && params[:project][:new_working_experience] != ""
+      params[:project][:working_experience_list] << params[:project][:new_working_experience]
+    end
+
+    if params[:project].has_key?(:new_study) && params[:project][:new_study] != nil && params[:project][:new_study] != ""
+      params[:project][:study_list] << params[:project][:new_study]
+    end
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -165,6 +193,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:title, :description, :city_id, :category_id, :time, { skill_list: [], study_list:[], working_experience_list:[], language_skill_list:[] }, :new_language_skill, :new_working_experience, :new_study, :new_skill, :urgent, :required_people, :is_private, :user_ids => [])
+      params.require(:project).permit(:title, :description, :city_id, :category_id, :time, { skill_list: [], study_list:[], working_experience_list:[], language_skill_list:[] }, :new_language_skill, :new_working_experience, :new_study, :new_skill, :urgent, :required_people, :is_private, :project_ids => [])
     end
 end

@@ -28,6 +28,9 @@ class Project < ActiveRecord::Base
 
   belongs_to :city
   belongs_to :category
+  validates :category, :presence => true
+  validates :title, :presence => true
+  validates :city, :presence => true
 
   accepts_nested_attributes_for :users, :users_projects, :participants, :participations
 
