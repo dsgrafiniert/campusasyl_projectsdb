@@ -30,7 +30,7 @@
       = f.label :studies , :class => "col-sm-2 control-label"
 
       .col-sm-10
-        = f.input_field :study_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "study").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.input_field :study_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "studies").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
         = f.label :new_study
         = f.text_field "new_study", class: "form-control", 'data-role': "tagsinput"
 
@@ -38,7 +38,7 @@
       = f.label :working_experience, :class => "col-sm-2 control-label"
 
       .col-sm-10
-        = f.input_field :working_experience_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "working_experience").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
+        = f.input_field :working_experience_list, label: false, as: :check_boxes, collection: Tagging.where(:context => "working_experiences").joins(:tag).select('DISTINCT tags.name').map{ |x| x.name}
         = f.label :new_working_experience
         = f.text_field "new_working_experience", class: "form-control", 'data-role': "tagsinput"
 
