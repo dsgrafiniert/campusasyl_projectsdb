@@ -18,7 +18,7 @@ gem 'ice_cube'
 gem 'schedulable'
 gem 'http_accept_language'
 gem 'i18n-tasks'
-
+gem 'whenever'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'omniauth-facebook'
