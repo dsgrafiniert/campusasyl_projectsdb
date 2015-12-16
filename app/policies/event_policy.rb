@@ -18,6 +18,10 @@ class EventPolicy< ApplicationPolicy
   def new?
     @current_user.admin?
   end
+  
+  def create?
+    @current_user.admin?
+  end
 
   def show?
     return true
