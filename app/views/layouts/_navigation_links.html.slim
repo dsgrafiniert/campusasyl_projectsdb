@@ -6,5 +6,7 @@ li
   li
     = link_to t(:my_events), my_events_path
   - if current_user.try(:admin?)
+	li
+      = link_to t(:categories_overview), categories_path
     li
       = link_to t(:users_overview), users_path
